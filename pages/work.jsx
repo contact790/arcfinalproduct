@@ -460,7 +460,7 @@ function WorkPage({ setRoute }) {
       {/* HERO */}
       <section className="page-hero">
         <div className="wrap">
-          <div className="work-hero-grid" style={{display:"grid", gridTemplateColumns:"1.4fr 1fr", gap:64, alignItems:"end", position:"relative", zIndex:1}}>
+          <div className="work-hero-grid" style={{alignItems:"end", position:"relative", zIndex:1}}>
             <div>
               <div className="eyebrow" style={{marginBottom:24, color:"#ffffff"}}>Portfolio</div>
               <h1 className="display upright" style={{margin:0, fontSize:"clamp(48px, 6.2vw, 92px)", fontWeight:700, letterSpacing:"-0.04em", lineHeight:1.02, color:"#ffffff"}}>
@@ -490,7 +490,7 @@ function WorkPage({ setRoute }) {
             <p className="muted" style={{margin:"16px 0 0", fontSize:16, lineHeight:1.55, maxWidth:"54ch"}}>Launching soon. Three live sites built by us — real products, real outcomes, no mockups.</p>
           </div>
 
-          <window.StaggerReveal className="work-cards-grid" style={{display:"grid", gridTemplateColumns:"repeat(3, minmax(0, 1fr))", gap:24}} baseDelay={0.1} stagger={0.12}>
+          <window.StaggerReveal className="work-cards-grid" style={{}} baseDelay={0.1} stagger={0.12}>
             {[1,2,3].map((n) => (
               <article key={n} style={{border:"1px dashed var(--hairline-strong)", borderRadius:20, overflow:"hidden", background:"var(--paper-2)"}}>
                 <div style={{aspectRatio:"4/3", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:16, padding:32}}>

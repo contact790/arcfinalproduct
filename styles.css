@@ -996,6 +996,45 @@ ul.clean { list-style: none; padding: 0; margin: 0; }
 }
 
 /* ============================================================
+   LAYOUT CLASSES — desktop grid definitions
+   (inline style grid props removed from JSX so CSS can override)
+   ============================================================ */
+
+/* Home */
+.hero-inner-grid       { display: grid; grid-template-columns: 1.35fr 1fr; gap: 64px; }
+.manifesto-grid        { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+.services-grid         { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.process-grid          { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; }
+.faq-grid              { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; }
+
+/* Services */
+.svc-hero-grid         { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.svc-web-head          { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.svc-web-body          { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.svc-ads-head          { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.svc-ads-body          { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.svc-toolbelt-head     { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; }
+.svc-process-head      { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.svc-toolbelt-grid     { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; }
+.svc-process-cards     { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+/* Pricing */
+.pricing-hero-grid     { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; }
+.pricing-web-tiers     { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.pricing-ads-tiers     { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.pricing-faq-grid      { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; }
+
+/* Work */
+.work-hero-grid        { display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px; }
+.work-cards-grid       { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+
+/* Contact */
+.contact-hero-grid     { display: grid; grid-template-columns: 1.5fr 1fr; gap: 64px; }
+.contact-body          { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+.contact-direct-grid   { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.contact-faq-grid      { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; }
+
+/* ============================================================
    RESPONSIVE — TABLET  (≤ 820px)
    ============================================================ */
 @media (max-width: 820px) {

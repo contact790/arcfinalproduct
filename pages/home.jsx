@@ -229,7 +229,7 @@ function HomePage({ setRoute }) {
       {/* HERO */}
       <section className="hero-section" style={{padding: "160px 0 180px", position:"relative", overflow:"hidden"}}>
         <div className="wrap">
-          <div className="hero-inner-grid" style={{display:"grid", gridTemplateColumns:"1.35fr 1fr", gap:64, alignItems:"center"}}>
+          <div className="hero-inner-grid" style={{alignItems:"center"}}>
             <div>
               <h1 className="display upright" style={{margin:0, fontSize:"clamp(48px, 5.5vw, 76px)", fontWeight:700, letterSpacing:"-0.04em", lineHeight:1.05, color:"#ffffff"}}>
                 <window.LineReveal delay={0.05}>
@@ -294,7 +294,7 @@ function HomePage({ setRoute }) {
       {/* MANIFESTO ROW */}
       <section style={{padding:"140px 0 120px"}}>
         <div className="wrap">
-          <div className="manifesto-grid" style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:80, alignItems:"start"}}>
+          <div className="manifesto-grid" style={{alignItems:"start"}}>
             <window.LineReveal tag="p" className="display upright h-display-sm" style={{margin:0, maxWidth:"14ch"}}>
               Most studios sell <span style={{color:"var(--accent)"}}><i>deliverables</i></span>. We sell outcomes.
             </window.LineReveal>
@@ -327,7 +327,7 @@ function HomePage({ setRoute }) {
             </window.Reveal>
           </div>
 
-          <window.StaggerReveal baseDelay={0.05} stagger={0.12} className="services-grid" style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:24}}>
+          <window.StaggerReveal baseDelay={0.05} stagger={0.12} className="services-grid" style={{}}>
             {/* Web card */}
             <div style={{border:"1px solid var(--hairline-strong)", borderRadius:20, overflow:"hidden", background:"var(--paper)"}}>
               <div style={{aspectRatio:"16/9", position:"relative", overflow:"hidden", background:"#ffffff"}}>
@@ -486,7 +486,7 @@ function HomePage({ setRoute }) {
       {/* PROCESS */}
       <section style={{padding:"100px 0", background:"var(--paper-2)", borderTop:"1px solid var(--hairline-strong)"}}>
         <div className="wrap">
-          <div className="process-grid" style={{display:"grid", gridTemplateColumns:"1fr 2fr", gap:80, alignItems:"start"}}>
+          <div className="process-grid" style={{alignItems:"start"}}>
             <div>
               <window.Reveal from="bottom" delay={0}>
                 <div className="eyebrow" style={{marginBottom:20}}>How we work</div>
@@ -529,7 +529,7 @@ function HomePage({ setRoute }) {
       {/* FAQ */}
       <section style={{padding:"100px 0"}}>
         <div className="wrap">
-          <div className="faq-grid" style={{display:"grid", gridTemplateColumns:"1fr 1.4fr", gap:80, alignItems:"start"}}>
+          <div className="faq-grid" style={{alignItems:"start"}}>
             <div>
               <div className="eyebrow" style={{marginBottom:16}}>FAQ</div>
               <h2 className="display upright h-display-sm" style={{margin:0, maxWidth:"12ch"}}>Common questions.</h2>

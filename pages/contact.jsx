@@ -226,7 +226,7 @@ function ContactPage({ setRoute }) {
       {/* HERO */}
       <section className="page-hero">
         <div className="wrap">
-          <div className="contact-hero-grid" style={{display:"grid", gridTemplateColumns:"1.5fr 1fr", gap:64, alignItems:"end", position:"relative", zIndex:1}}>
+          <div className="contact-hero-grid" style={{alignItems:"end", position:"relative", zIndex:1}}>
             <div>
               <div className="eyebrow" style={{marginBottom:24, color:"#ffffff"}}>Contact</div>
               <h1 className="display upright" style={{margin:0, fontSize:"clamp(48px, 6.2vw, 92px)", fontWeight:700, letterSpacing:"-0.04em", lineHeight:1.02, color:"#ffffff"}}>
@@ -253,7 +253,7 @@ function ContactPage({ setRoute }) {
 
       {/* CONTACT GRID */}
       <section style={{padding:"80px 0 80px"}}>
-        <div className="wrap contact-body" style={{display:"grid", gridTemplateColumns:"repeat(2, minmax(0, 1fr))", gap:64, alignItems:"start"}}>
+        <div className="wrap contact-body" style={{alignItems:"start"}}>
 
           {/* LEFT — Form */}
           <div>
@@ -314,7 +314,7 @@ function ContactPage({ setRoute }) {
               <h3 className="display upright" style={{fontSize:32, margin:"0 0 28px", letterSpacing:"-0.03em", fontWeight:700}}>
                 Or reach us directly
               </h3>
-              <div className="contact-direct-grid" style={{display:"grid", gridTemplateColumns:"repeat(2, minmax(0, 1fr))", gap:24}}>
+              <div className="contact-direct-grid">
                 {[
                   ["Email",  "contact@arcaiagency.net"],
                   ["Studio", "San Francisco, California"],
@@ -399,7 +399,7 @@ function ContactPage({ setRoute }) {
       {/* FAQ */}
       <section style={{padding:"80px 0 100px", borderTop:"1px solid var(--hairline)", background:"var(--paper-2)"}}>
         <div className="wrap">
-          <div className="contact-faq-grid" style={{display:"grid", gridTemplateColumns:"1fr 1.4fr", gap:80, alignItems:"start"}}>
+          <div className="contact-faq-grid" style={{alignItems:"start"}}>
             <div>
               <div className="eyebrow" style={{marginBottom:16}}>FAQ</div>
               <h2 className="display upright h-display-sm" style={{margin:0, maxWidth:"12ch"}}>Quick answers.</h2>
