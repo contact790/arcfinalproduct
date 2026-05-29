@@ -9,7 +9,7 @@ function ServicesPage({ setRoute }) {
       {/* HERO */}
       <section className="page-hero">
         <div className="wrap">
-          <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:64, alignItems:"end", position:"relative", zIndex:1}}>
+          <div className="svc-hero-grid" style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:64, alignItems:"end", position:"relative", zIndex:1}}>
             <div>
               <div className="eyebrow" style={{marginBottom:24, color:"#ffffff"}}>What we do</div>
               <h1 className="display upright" style={{margin:0, fontSize:"clamp(48px, 6.2vw, 88px)", fontWeight:700, letterSpacing:"-0.04em", lineHeight:1.02, color:"#ffffff"}}>
@@ -34,7 +34,7 @@ function ServicesPage({ setRoute }) {
         <div className="wrap">
 
           {/* Label + headline */}
-          <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:64, alignItems:"end", marginBottom:64, paddingBottom:48, borderBottom:"1px solid var(--hairline-strong)"}}>
+          <div className="svc-web-head" style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:64, alignItems:"end", marginBottom:64, paddingBottom:48, borderBottom:"1px solid var(--hairline-strong)"}}>
             <div>
               <div className="eyebrow" style={{marginBottom:18}}>Web design &amp; build</div>
               <h2 className="display upright h-display-sm" style={{margin:0}}>Websites that <i style={{color:"var(--accent)"}}>earn</i> their keep.</h2>
@@ -45,7 +45,7 @@ function ServicesPage({ setRoute }) {
           </div>
 
           {/* Visual + deliverables */}
-          <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:48, alignItems:"start"}}>
+          <div className="svc-web-body" style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:48, alignItems:"start"}}>
 
             {/* Website Design Mockup — CoreDesign-inspired agency portfolio */}
             <div style={{borderRadius:20, overflow:"hidden", border:"1px solid var(--hairline-strong)", background:"#f4f5f8", aspectRatio:"4/3", position:"relative", boxShadow:"0 8px 40px rgba(6,14,32,0.12)"}}>
@@ -148,7 +148,7 @@ function ServicesPage({ setRoute }) {
       <section style={{padding:"100px 0", background:"var(--paper-2)", borderTop:"1px solid var(--hairline-strong)"}}>
         <div className="wrap">
 
-          <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:64, alignItems:"end", marginBottom:64, paddingBottom:48, borderBottom:"1px solid var(--hairline-strong)"}}>
+          <div className="svc-ads-head" style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:64, alignItems:"end", marginBottom:64, paddingBottom:48, borderBottom:"1px solid var(--hairline-strong)"}}>
             <div>
               <div className="eyebrow" style={{marginBottom:18}}>Paid acquisition</div>
               <h2 className="display upright h-display-sm" style={{margin:0}}>Ads run like a <i style={{color:"var(--accent)"}}>portfolio</i>.</h2>
@@ -158,7 +158,7 @@ function ServicesPage({ setRoute }) {
             </p>
           </div>
 
-          <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:48, alignItems:"start"}}>
+          <div className="svc-ads-body" style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:48, alignItems:"start"}}>
 
             {/* Ads deliverables first (flipped) */}
             <div style={{display:"flex", flexDirection:"column", gap:0}}>
@@ -336,7 +336,7 @@ function ServicesPage({ setRoute }) {
       {/* TOOLBELT */}
       <section style={{padding:"100px 0"}}>
         <div className="wrap">
-          <div style={{display:"grid", gridTemplateColumns:"1fr 2fr", gap:80, alignItems:"start", marginBottom:64}}>
+          <div className="svc-toolbelt-head" style={{display:"grid", gridTemplateColumns:"1fr 2fr", gap:80, alignItems:"start", marginBottom:64}}>
             <div>
               <div className="eyebrow" style={{marginBottom:16}}>The toolbelt</div>
               <h2 className="display upright h-display-sm" style={{margin:0}}>Boring stack. Loud results.</h2>
@@ -344,7 +344,7 @@ function ServicesPage({ setRoute }) {
             <p className="muted" style={{margin:0, fontSize:17, lineHeight:1.65, paddingTop:40}}>We're allergic to fashion. Every tool is picked for one reason — it helps us ship faster and measure cleaner.</p>
           </div>
           <window.Reveal from="bottom">
-          <div style={{display:"grid", gridTemplateColumns:"repeat(4, minmax(0, 1fr))", gap:1, background:"var(--hairline-strong)", border:"1px solid var(--hairline-strong)", borderRadius:16, overflow:"hidden"}}>
+          <div className="svc-toolbelt-grid" style={{display:"grid", gridTemplateColumns:"repeat(4, minmax(0, 1fr))", gap:1, background:"var(--hairline-strong)", border:"1px solid var(--hairline-strong)", borderRadius:16, overflow:"hidden"}}>
             {[
               { name:"Meta Ads",   desc:"Paid social",               color:"#0081FB", svg:<svg viewBox="0 0 24 24"><path fill="currentColor" d="M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973a6.624 6.624 0 0 0 .265.86 5.297 5.297 0 0 0 .371.761c.696 1.159 1.818 1.927 3.593 1.927 1.497 0 2.633-.671 3.965-2.444.76-1.012 1.144-1.626 2.663-4.32l.756-1.339.186-.325c.061.1.121.196.183.3l2.152 3.595c.724 1.21 1.665 2.556 2.47 3.314 1.046.987 1.992 1.22 3.06 1.22 1.075 0 1.876-.355 2.455-.843a3.743 3.743 0 0 0 .81-.973c.542-.939.861-2.127.861-3.745 0-2.72-.681-5.357-2.084-7.45-1.282-1.912-2.957-2.93-4.716-2.93-1.047 0-2.088.467-3.053 1.308-.652.57-1.257 1.29-1.82 2.05-.69-.875-1.335-1.547-1.958-2.056-1.182-.966-2.315-1.303-3.454-1.303zm10.16 2.053c1.147 0 2.188.758 2.992 1.999 1.132 1.748 1.647 4.195 1.647 6.4 0 1.548-.368 2.9-1.839 2.9-.58 0-1.027-.23-1.664-1.004-.496-.601-1.343-1.878-2.832-4.358l-.617-1.028a44.908 44.908 0 0 0-1.255-1.98c.07-.109.141-.224.211-.327 1.12-1.667 2.118-2.602 3.358-2.602zm-10.201.553c1.265 0 2.058.791 2.675 1.446.307.327.737.871 1.234 1.579l-1.02 1.566c-.757 1.163-1.882 3.017-2.837 4.338-1.191 1.649-1.81 1.817-2.486 1.817-.524 0-1.038-.237-1.383-.794-.263-.426-.464-1.13-.464-2.046 0-2.221.63-4.535 1.66-6.088.454-.687.964-1.226 1.533-1.533a2.264 2.264 0 0 1 1.088-.285z"/></svg> },
               { name:"Google Ads", desc:"Search, display, shopping", color:"#4285F4", svg:<svg viewBox="0 0 24 24"><path fill="currentColor" d="M3.9998 22.9291C1.7908 22.9291 0 21.1383 0 18.9293s1.7908-3.9998 3.9998-3.9998 3.9998 1.7908 3.9998 3.9998-1.7908 3.9998-3.9998 3.9998zm19.4643-6.0004L15.4632 3.072C14.3586 1.1587 11.9121.5028 9.9988 1.6074S7.4295 5.1585 8.5341 7.0718l8.0009 13.8567c1.1046 1.9133 3.5511 2.5679 5.4644 1.4646 1.9134-1.1046 2.568-3.5511 1.4647-5.4644zM7.5137 4.8438L1.5645 15.1484A4.5 4.5 0 0 1 4 14.4297c2.5597-.0075 4.6248 2.1585 4.4941 4.7148l3.2168-5.5723-3.6094-6.25c-.4499-.7793-.6322-1.6394-.5878-2.4784z"/></svg> },
@@ -373,7 +373,7 @@ function ServicesPage({ setRoute }) {
       {/* PROCESS */}
       <section style={{padding:"0 0 100px"}}>
         <div className="wrap">
-          <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:64, alignItems:"end", marginBottom:56}}>
+          <div className="svc-process-head" style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:64, alignItems:"end", marginBottom:56}}>
             <div>
               <div className="eyebrow" style={{marginBottom:16}}>How we work</div>
               <h2 className="display upright h-display-sm" style={{margin:0}}>Three steps. No surprises.</h2>
@@ -381,7 +381,7 @@ function ServicesPage({ setRoute }) {
             <p className="muted" style={{margin:0, fontSize:17, lineHeight:1.6}}>From first call to live — you see every file, every week, every decision in writing.</p>
           </div>
 
-          <window.StaggerReveal style={{display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:16}} baseDelay={0.1} stagger={0.13}>
+          <window.StaggerReveal className="svc-process-cards" style={{display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:16}} baseDelay={0.1} stagger={0.13}>
             {[
               {num:"01", title:"Discovery", time:"Days 1–5",  points:["60-min strategy call","Audience & offer audit","KPI tree, single north star","Written scope, fixed price"]},
               {num:"02", title:"Build",     time:"Weeks 2–7", points:["Design in Figma, approved first","Engineering in parallel","Friday Loom — no status calls","QA, performance, launch"]},

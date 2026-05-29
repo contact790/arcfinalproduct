@@ -75,7 +75,7 @@ function PricingPage({ setRoute }) {
       {/* HERO */}
       <section className="page-hero">
         <div className="wrap">
-          <div style={{display:"grid", gridTemplateColumns:"1.2fr 1fr", gap:64, alignItems:"end", position:"relative", zIndex:1}}>
+          <div className="pricing-hero-grid" style={{display:"grid", gridTemplateColumns:"1.2fr 1fr", gap:64, alignItems:"end", position:"relative", zIndex:1}}>
             <div>
               <div className="eyebrow" style={{marginBottom:24, color:"#ffffff"}}>Pricing</div>
               <h1 className="display upright" style={{margin:0, fontSize:"clamp(48px, 6.2vw, 88px)", fontWeight:700, letterSpacing:"-0.04em", lineHeight:1.02, color:"#ffffff"}}>
@@ -101,7 +101,7 @@ function PricingPage({ setRoute }) {
             <p className="muted" style={{maxWidth:"44ch", fontSize:15, margin:0, lineHeight:1.55}}>Or don't — we scope custom too. Every engagement starts with a 30-minute call.</p>
           </div>
 
-          <window.StaggerReveal style={{display:"grid", gridTemplateColumns:"repeat(3,minmax(0,1fr))", gap:16}} baseDelay={0.05} stagger={0.12}>
+          <window.StaggerReveal className="pricing-web-tiers" style={{display:"grid", gridTemplateColumns:"repeat(3,minmax(0,1fr))", gap:16}} baseDelay={0.05} stagger={0.12}>
             {webTiers.map((t,i) => (
               <div key={i} className="pricing-card" style={{
                 borderRadius:16,
@@ -176,7 +176,7 @@ function PricingPage({ setRoute }) {
             <p className="muted" style={{maxWidth:"44ch", fontSize:15, margin:0, lineHeight:1.55}}>A flat retainer for setup and creative, plus a small % of media spend. No long-term lock-in.</p>
           </div>
 
-          <window.StaggerReveal style={{display:"grid", gridTemplateColumns:"repeat(3,minmax(0,1fr))", gap:16}} baseDelay={0.05} stagger={0.12}>
+          <window.StaggerReveal className="pricing-ads-tiers" style={{display:"grid", gridTemplateColumns:"repeat(3,minmax(0,1fr))", gap:16}} baseDelay={0.05} stagger={0.12}>
             {adsTiers.map((t,i) => (
               <div key={i} className="pricing-card" style={{
                 borderRadius:16,
@@ -229,7 +229,7 @@ function PricingPage({ setRoute }) {
       {/* FAQ */}
       <section style={{padding:"100px 0"}}>
         <div className="wrap">
-          <div style={{display:"grid", gridTemplateColumns:"1fr 1.4fr", gap:80, alignItems:"start"}}>
+          <div className="pricing-faq-grid" style={{display:"grid", gridTemplateColumns:"1fr 1.4fr", gap:80, alignItems:"start"}}>
             <div>
               <div className="eyebrow" style={{marginBottom:16}}>FAQ</div>
               <h2 className="display upright h-display-sm" style={{margin:0, maxWidth:"12ch"}}>Things people ask first.</h2>
