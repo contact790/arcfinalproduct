@@ -25,6 +25,7 @@ function ScrollProgress() {
 // ---------------- Nav ----------------
 function Nav({ route, setRoute, className }) {
   const [scrolled, setScrolled] = React.useState(false);
+  const [menuOpen, setMenuOpen] = React.useState(false);
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -38,6 +39,12 @@ function Nav({ route, setRoute, className }) {
     { id: "pricing",  label: "Pricing" },
     { id: "contact",  label: "Contact" },
   ];
+
+  function navigate(id) {
+    setRoute(id);
+    setMenuOpen(false);
+  }
+
   return (
     <>
       <ScrollProgress />
@@ -48,23 +55,42 @@ function Nav({ route, setRoute, className }) {
             ? "0 4px 32px rgba(10,23,51,0.16), 0 1px 4px rgba(10,23,51,0.08)"
             : "0 2px 20px rgba(10,23,51,0.12), 0 1px 4px rgba(10,23,51,0.06)",
         }}>
-          <a onClick={() => setRoute("home")} style={{display:"flex",alignItems:"center",cursor:"pointer",textDecoration:"none"}}>
+          <a onClick={() => navigate("home")} style={{display:"flex",alignItems:"center",cursor:"pointer",textDecoration:"none"}}>
             <img src="logo-arc-clean.png" alt="ARC" style={{height:32, width:"auto", display:"block", background:"#ffffff", padding:"4px 6px", borderRadius:6}} />
           </a>
           <div className="nav-links">
             {items.map(it => (
               <a key={it.id}
                  className={"nav-link " + (route === it.id ? "active" : "")}
-                 onClick={() => setRoute(it.id)}>
+                 onClick={() => navigate(it.id)}>
                 {it.label}
               </a>
             ))}
           </div>
-          <a className="btn btn-accent" onClick={() => setRoute("contact")} style={{padding:"10px 20px", fontSize:13.5, borderRadius:10}}>
+          <a className="btn btn-accent nav-cta-desktop" onClick={() => navigate("contact")} style={{padding:"10px 20px", fontSize:13.5, borderRadius:10}}>
+            Start a project <span className="arrow">→</span>
+          </a>
+          <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+            <span className={"ham-line" + (menuOpen ? " open" : "")}></span>
+            <span className={"ham-line" + (menuOpen ? " open" : "")}></span>
+            <span className={"ham-line" + (menuOpen ? " open" : "")}></span>
+          </button>
+        </div>
+      </nav>
+      {menuOpen && (
+        <div className="mobile-menu">
+          {items.map(it => (
+            <a key={it.id}
+               className={"mobile-menu-link" + (route === it.id ? " active" : "")}
+               onClick={() => navigate(it.id)}>
+              {it.label}
+            </a>
+          ))}
+          <a className="btn btn-accent" onClick={() => navigate("contact")} style={{marginTop:8, width:"100%", justifyContent:"center"}}>
             Start a project <span className="arrow">→</span>
           </a>
         </div>
-      </nav>
+      )}
     </>
   );
 }
@@ -92,10 +118,9 @@ function CTASection({ title, description, buttonText, setRoute }) {
   return (
     <section style={{padding: "80px 0"}}>
       <div className="wrap">
-        <div style={{background:"linear-gradient(180deg, #1245e8 0%, #2d5fff 60%, #6b94ff 100%)", borderRadius:24, padding:"72px 64px", position:"relative", overflow:"hidden"}}>
-          {/* soft radial glow */}
+        <div className="cta-box">
           <div style={{position:"absolute", top:"-40%", right:"-10%", width:"60%", aspectRatio:"1", background:"radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%)", pointerEvents:"none"}} />
-          <div style={{position:"relative", zIndex:1, display:"grid", gridTemplateColumns:"1fr auto", gap:48, alignItems:"end"}}>
+          <div className="cta-inner">
             <div>
               <h2 className="display h-display-sm" style={{margin:"0 0 20px", maxWidth:"18ch", color:"#ffffff"}}>
                 {title}
@@ -120,7 +145,7 @@ function Footer({ setRoute }) {
   return (
     <footer className="footer">
       <div className="wrap">
-        <div style={{display:"grid", gridTemplateColumns:"2fr 1fr 1fr 1fr", gap:48, alignItems:"start"}}>
+        <div className="footer-grid">
           <div>
             <h3 className="display upright" style={{fontSize:56, margin:0, lineHeight:0.95, letterSpacing:"-0.03em", color:"var(--ink)"}}>
               Let's make<br/>numbers move.
