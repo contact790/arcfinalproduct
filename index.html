@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ARC AI — Performance Digital Agency</title>
+
+<!-- Cookie Consent Banner — custom, no third-party dependency -->
+<style>
+  #arc-cookie-banner {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(560px, calc(100vw - 32px));
+    background: #060e20;
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.35);
+    z-index: 99999;
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+    display: none;
+  }
+  #arc-cookie-banner.visible { display: block; }
+  #arc-cookie-banner h4 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  #arc-cookie-banner p { margin: 0 0 20px; color: rgba(255,255,255,0.7); font-size: 13px; }
+  #arc-cookie-banner p a { color: #7eb3ff; text-decoration: underline; }
+  .arc-cookie-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  .arc-cookie-btns button {
+    flex: 1;
+    min-width: 120px;
+    padding: 11px 18px;
+    border-radius: 10px;
+    border: none;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+  .arc-cookie-btns button:hover { opacity: 0.88; }
+  #arc-btn-accept { background: #0052FF; color: #fff; }
+  #arc-btn-reject { background: rgba(255,255,255,0.1); color: #fff; }
+  #arc-btn-prefs  { background: transparent; color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.18) !important; flex: 0 0 auto; }
+
+  /* Preferences panel */
+  #arc-cookie-prefs {
+    position: fixed;
+    inset: 0;
+    background: rgba(6,14,32,0.7);
+    backdrop-filter: blur(4px);
+    z-index: 100000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  #arc-cookie-prefs.visible { display: flex; }
+  #arc-prefs-panel {
+    background: #fff;
+    color: #060e20;
+    border-radius: 20px;
+    width: min(520px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 36px 32px;
+    font-family: "Manrope", sans-serif;
+  }
+  #arc-prefs-panel h3 { margin: 0 0 8px; font-size: 22px; font-weight: 700; letter-spacing: -0.03em; }
+  #arc-prefs-panel > p { margin: 0 0 28px; font-size: 13px; color: #4a5568; line-height: 1.6; }
+  .arc-pref-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 0;
+    border-top: 1px solid rgba(10,23,51,0.1);
+  }
+  .arc-pref-row:last-of-type { border-bottom: 1px solid rgba(10,23,51,0.1); }
+  .arc-pref-label { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+  .arc-pref-desc { font-size: 12px; color: #6b7280; line-height: 1.5; max-width: 320px; }
+  /* Toggle switch */
+  .arc-toggle { position: relative; width: 44px; height: 24px; flex-shrink: 0; }
+  .arc-toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+  .arc-toggle-track {
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    background: rgba(10,23,51,0.15);
+    transition: background 0.2s ease;
+    cursor: pointer;
+  }
+  .arc-toggle input:checked + .arc-toggle-track { background: #0052FF; }
+  .arc-toggle input:disabled + .arc-toggle-track { background: #0052FF; opacity: 0.6; cursor: not-allowed; }
+  .arc-toggle-track::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+  .arc-toggle input:checked + .arc-toggle-track::after { transform: translateX(20px); }
+  .arc-prefs-save {
+    margin-top: 28px;
+    width: 100%;
+    padding: 14px;
+    background: #0052FF;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .arc-prefs-save:hover { background: #003fcc; }
+
+  /* Floating re-open icon */
+  #arc-cookie-icon {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #0052FF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99998;
+    box-shadow: 0 4px 16px rgba(0,82,255,0.4);
+    transition: transform 0.2s ease;
+  }
+  #arc-cookie-icon:hover { transform: scale(1.1); }
+  #arc-cookie-icon.visible { display: flex; }
+</style>
+
+<script>
+(function() {
+  var STORAGE_KEY = "arc_cookie_consent";
+
+  function getConsent() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch(e) { return null; }
+  }
+
+  function saveConsent(prefs) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+  }
+
+  function applyConsent(prefs) {
+    if (prefs.marketing) loadTidio();
+  }
+
+  var tidioLoaded = false;
+  function loadTidio() {
+    if (tidioLoaded) return;
+    tidioLoaded = true;
+    var s = document.createElement("script");
+    s.src = "//code.tidio.co/qf8ks1qdpuhpijtjj4ilgsugvexyodvt.js";
+    s.async = true;
+    document.body.appendChild(s);
+  }
+
+  function hideBanner() {
+    var b = document.getElementById("arc-cookie-banner");
+    if (b) b.classList.remove("visible");
+    var ic = document.getElementById("arc-cookie-icon");
+    if (ic) ic.classList.add("visible");
+  }
+
+  function showPrefs() {
+    document.getElementById("arc-cookie-prefs").classList.add("visible");
+  }
+
+  function hidePrefs() {
+    document.getElementById("arc-cookie-prefs").classList.remove("visible");
+  }
+
+  window.arcCookieInit = function() {
+    var existing = getConsent();
+    if (existing) {
+      applyConsent(existing);
+      document.getElementById("arc-cookie-icon").classList.add("visible");
+      // Pre-fill toggles
+      var aC = document.getElementById("arc-toggle-analytics");
+      var mC = document.getElementById("arc-toggle-marketing");
+      if (aC) aC.checked = !!existing.analytics;
+      if (mC) mC.checked = !!existing.marketing;
+      return;
+    }
+    document.getElementById("arc-cookie-banner").classList.add("visible");
+
+    document.getElementById("arc-btn-accept").onclick = function() {
+      var prefs = { essential: true, analytics: true, marketing: true };
+      saveConsent(prefs);
+      applyConsent(prefs);
+      hideBanner();
+    };
+
+    document.getElementById("arc-btn-reject").onclick = function() {
+      var prefs = { essential: true, analytics: false, marketing: false };
+      saveConsent(prefs);
+      applyConsent(prefs);
+      hideBanner();
+    };
+
+    document.getElementById("arc-btn-prefs").onclick = showPrefs;
+  };
+
+  window.arcOpenPrefs = function() { showPrefs(); };
+
+  window.arcSavePrefs = function() {
+    var analytics = document.getElementById("arc-toggle-analytics").checked;
+    var marketing = document.getElementById("arc-toggle-marketing").checked;
+    var prefs = { essential: true, analytics: analytics, marketing: marketing };
+    saveConsent(prefs);
+    applyConsent(prefs);
+    hidePrefs();
+    hideBanner();
+  };
+
+  window.arcClosePrefs = function() { hidePrefs(); };
+
+  document.addEventListener("DOMContentLoaded", function() {
+    window.arcCookieInit();
+  });
+})();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="shell.jsx"></script>
+<script type="text/babel" src="pages/home.jsx"></script>
+<script type="text/babel" src="pages/services.jsx"></script>
+<script type="text/babel" src="pages/pricing.jsx"></script>
+<script type="text/babel" src="pages/work.jsx"></script>
+<script type="text/babel" src="pages/contact.jsx"></script>
+<script type="text/babel" src="pages/privacy.jsx"></script>
+<script type="text/babel" src="pages/terms.jsx"></script>
+<script type="text/babel" src="animations.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+<!-- Cookie Banner HTML -->
+<div id="arc-cookie-banner" role="dialog" aria-label="Cookie consent">
+  <h4>We use cookies</h4>
+  <p>We use cookies to improve your experience, run analytics, and show relevant ads. Read our <a href="#privacy" onclick="window.__setRoute&&window.__setRoute('privacy')">Privacy Policy</a>.</p>
+  <div class="arc-cookie-btns">
+    <button id="arc-btn-accept">Accept all</button>
+    <button id="arc-btn-reject">Reject non-essential</button>
+    <button id="arc-btn-prefs">Preferences</button>
+  </div>
+</div>
+
+<!-- Preferences Panel -->
+<div id="arc-cookie-prefs" role="dialog" aria-label="Cookie preferences">
+  <div id="arc-prefs-panel">
+    <h3>Cookie preferences</h3>
+    <p>We respect your privacy. Choose which cookies you allow. Your preferences apply across our site.</p>
+
+    <div class="arc-pref-row">
+      <div>
+        <div class="arc-pref-label">Essential</div>
+        <div class="arc-pref-desc">Required for the site to function. Cannot be disabled.</div>
+      </div>
+      <label class="arc-toggle">
+        <input type="checkbox" id="arc-toggle-essential" checked disabled>
+        <span class="arc-toggle-track"></span>
+      </label>
+    </div>
+
+    <div class="arc-pref-row">
+      <div>
+        <div class="arc-pref-label">Analytics</div>
+        <div class="arc-pref-desc">Help us understand which pages are popular and how visitors move around the site.</div>
+      </div>
+      <label class="arc-toggle">
+        <input type="checkbox" id="arc-toggle-analytics" checked>
+        <span class="arc-toggle-track"></span>
+      </label>
+    </div>
+
+    <div class="arc-pref-row">
+      <div>
+        <div class="arc-pref-label">Marketing</div>
+        <div class="arc-pref-desc">Used by us and our partners (Meta, Google) to show relevant ads and measure campaign performance.</div>
+      </div>
+      <label class="arc-toggle">
+        <input type="checkbox" id="arc-toggle-marketing">
+        <span class="arc-toggle-track"></span>
+      </label>
+    </div>
+
+    <button class="arc-prefs-save" onclick="arcSavePrefs()">Save and close</button>
+    <p style="text-align:center;font-size:12px;color:#9ca3af;margin:14px 0 0;">
+      Questions? <a href="mailto:contact@arcaiagency.net" style="color:#0052FF;">contact@arcaiagency.net</a>
+    </p>
+  </div>
+</div>
+
+<!-- Floating re-open icon -->
+<button id="arc-cookie-icon" onclick="arcOpenPrefs()" aria-label="Cookie preferences" title="Cookie preferences">
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8.5" stroke="#fff" stroke-width="1.6"/><circle cx="7" cy="8" r="1.2" fill="#fff"/><circle cx="13" cy="8" r="1.2" fill="#fff"/><path d="M7 12.5c.8 1 2 1.5 3 1.5s2.2-.5 3-1.5" stroke="#fff" stroke-width="1.4" stroke-linecap="round"/></svg>
+</button>
+</body>
+</html>

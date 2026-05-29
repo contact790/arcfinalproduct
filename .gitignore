@@ -1,0 +1,7 @@
+node_modules/
+uploads/
+*.png.png
+_check*.png
+_diag*.png
+.claude/
+.thumbnail
