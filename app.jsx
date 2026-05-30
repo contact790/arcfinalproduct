@@ -82,7 +82,7 @@ function App() {
       <React.Fragment>
         <window.CursorDot />
         <Nav route={route} setRoute={setRoute} lang={lang} setLang={setLang} />
-        <main data-screen-label={route} style={{background:"#ffffff"}}>
+        <main data-screen-label={route} style={{background:"var(--paper)"}}>
           <Page key={route + lang} setRoute={setRoute} lang={lang} />
         </main>
         <Footer setRoute={setRoute} lang={lang} />

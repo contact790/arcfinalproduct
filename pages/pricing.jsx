@@ -8,29 +8,29 @@ function PricingPage({ setRoute, lang }) {
   const webTiers = [
     {
       name: "Starter",
-      sub:  "Landing page or 3-pager. Live in two to three weeks.",
+      sub:  isMK ? "Целна страница или 3 страници. Активно за две до три недели." : "Landing page or 3-pager. Live in two to three weeks.",
       setup:"€199",
       mo:   "€30/mo",
       featured: false,
-      lines: ["Up to 3 pages","Responsive design","Contact form","Basic SEO","Monthly updates"],
-      missing: ["CMS integration","Custom integrations"],
+      lines: isMK ? ["До 3 страници","Responsive дизајн","Контактен формулар","Основно SEO","Месечни ажурирања"] : ["Up to 3 pages","Responsive design","Contact form","Basic SEO","Monthly updates"],
+      missing: isMK ? ["CMS интеграција","Прилагодени интеграции"] : ["CMS integration","Custom integrations"],
     },
     {
       name: "Standard",
-      sub:  "The proper online presence. CMS-driven, several pages.",
+      sub:  isMK ? "Вистинско онлајн присуство. CMS-базирано, повеќе страници." : "The proper online presence. CMS-driven, several pages.",
       setup:"€499",
       mo:   "€50/mo",
       featured: true,
-      lines: ["Up to 7 pages","Custom UI/UX","CMS integration","Advanced SEO","Performance pass","Priority support"],
-      missing: ["E-commerce"],
+      lines: isMK ? ["До 7 страници","Прилагоден UI/UX","CMS интеграција","Напредно SEO","Оптимизација на перформанси","Приоритетна поддршка"] : ["Up to 7 pages","Custom UI/UX","CMS integration","Advanced SEO","Performance pass","Priority support"],
+      missing: isMK ? ["Е-трговија"] : ["E-commerce"],
     },
     {
       name: "Premium",
-      sub:  "E-commerce, integrations, dedicated team.",
+      sub:  isMK ? "Е-трговија, интеграции, наменски тим." : "E-commerce, integrations, dedicated team.",
       setup:"€999",
       mo:   "€99/mo",
       featured: false,
-      lines: ["Unlimited pages","Full design system","E-commerce","API integrations","Custom backend","Dedicated PM","24/7 support"],
+      lines: isMK ? ["Неограничени страници","Целосен дизајн систем","Е-трговија","API интеграции","Прилагоден бекенд","Наменски менаџер","Поддршка 24/7"] : ["Unlimited pages","Full design system","E-commerce","API integrations","Custom backend","Dedicated PM","24/7 support"],
       missing: [],
     },
   ];
@@ -38,24 +38,24 @@ function PricingPage({ setRoute, lang }) {
   const adsTiers = [
     {
       name: "Spark",
-      sub:  "For brands testing paid for the first time.",
+      sub:  isMK ? "За брендови кои за прв пат тестираат платено огласување." : "For brands testing paid for the first time.",
       fee:  "€450/mo",
       featured: false,
-      lines: ["One platform","Weekly check-in","Creative concepts weekly"],
+      lines: isMK ? ["Една платформа","Неделен преглед","Неделни концепти за креатива"] : ["One platform","Weekly check-in","Creative concepts weekly"],
     },
     {
       name: "Scale",
-      sub:  "For brands spending and ready to grow.",
+      sub:  isMK ? "За брендови кои трошат и се подготвени да растат." : "For brands spending and ready to grow.",
       fee:  "€950/mo",
       featured: true,
-      lines: ["Two platforms","Slack channel","Creative concepts weekly","Monthly retro"],
+      lines: isMK ? ["Две платформи","Slack канал","Неделни концепти за креатива","Месечна ретроспектива"] : ["Two platforms","Slack channel","Creative concepts weekly","Monthly retro"],
     },
     {
       name: "Compound",
-      sub:  "For mature programs with serious volume.",
+      sub:  isMK ? "За зрели програми со сериозен обем." : "For mature programs with serious volume.",
       fee:  "€1,850/mo",
       featured: false,
-      lines: ["Three+ platforms","Dedicated buyer","Unlimited creative","Weekly retros","Quarterly strategy"],
+      lines: isMK ? ["Три+ платформи","Наменски купувач на медиуми","Неограничена креатива","Неделни ретроспективи","Квартална стратегија"] : ["Three+ platforms","Dedicated buyer","Unlimited creative","Weekly retros","Quarterly strategy"],
     },
   ];
 
@@ -78,14 +78,23 @@ function PricingPage({ setRoute, lang }) {
         <div className="wrap">
           <div className="pricing-hero-grid" style={{alignItems:"end", position:"relative", zIndex:1}}>
             <div>
-              <div className="eyebrow" style={{marginBottom:24, color:"#ffffff"}}>Pricing</div>
+              <div className="eyebrow" style={{marginBottom:24, color:"#ffffff"}}>{isMK ? "Цени" : "Pricing"}</div>
               <h1 className="display upright" style={{margin:0, fontSize:"clamp(48px, 6.2vw, 88px)", fontWeight:700, letterSpacing:"-0.04em", lineHeight:1.02, color:"#ffffff"}}>
-                <span style={{display:"block"}}>Fixed pricing.</span>
-                <span style={{display:"block"}}><span style={{color:"var(--accent)"}}>No surprises.</span></span>
+                {isMK ? (
+                  <>
+                    <span style={{display:"block"}}>Фиксни цени.</span>
+                    <span style={{display:"block"}}><span style={{color:"var(--accent)"}}>Без изненадувања.</span></span>
+                  </>
+                ) : (
+                  <>
+                    <span style={{display:"block"}}>Fixed pricing.</span>
+                    <span style={{display:"block"}}><span style={{color:"var(--accent)"}}>No surprises.</span></span>
+                  </>
+                )}
               </h1>
             </div>
             <p style={{fontSize:18, lineHeight:1.6, maxWidth:"42ch", color:"rgba(255,255,255,0.85)", margin:0}}>
-              Setup fees you pay once. A flat monthly that keeps the site healthy and the team on retainer. If we go over scope, that's on us — not you.
+              {isMK ? "Еднократна такса за поставување. Рамен месечен ретенер кој го одржува сајтот во тек и тимот на располагање. Ако надминеме опфат, тоа е наш проблем — не ваш." : "Setup fees you pay once. A flat monthly that keeps the site healthy and the team on retainer. If we go over scope, that's on us — not you."}
             </p>
           </div>
         </div>
@@ -96,10 +105,10 @@ function PricingPage({ setRoute, lang }) {
         <div className="wrap">
           <div style={{display:"flex", justifyContent:"space-between", alignItems:"flex-end", marginBottom:48, flexWrap:"wrap", gap:20}}>
             <div>
-              <div className="eyebrow" style={{marginBottom:12}}>Web design &amp; build</div>
-              <h2 className="display upright h-display-sm" style={{margin:0}}>Pick a tier.</h2>
+              <div className="eyebrow" style={{marginBottom:12}}>{isMK ? "Веб дизајн &amp; развој" : "Web design &amp; build"}</div>
+              <h2 className="display upright h-display-sm" style={{margin:0}}>{isMK ? "Изберете ниво." : "Pick a tier."}</h2>
             </div>
-            <p className="muted" style={{maxWidth:"44ch", fontSize:15, margin:0, lineHeight:1.55}}>Or don't — we scope custom too. Every engagement starts with a 30-minute call.</p>
+            <p className="muted" style={{maxWidth:"44ch", fontSize:15, margin:0, lineHeight:1.55}}>{isMK ? "Или не — правиме и прилагодени опфати. Секој ангажман започнува со 30-минутен повик." : "Or don't — we scope custom too. Every engagement starts with a 30-minute call."}</p>
           </div>
 
           <window.StaggerReveal className="pricing-web-tiers" style={{}} baseDelay={0.05} stagger={0.12}>
@@ -119,7 +128,7 @@ function PricingPage({ setRoute, lang }) {
               }}>
                 {t.featured && (
                   <div style={{position:"absolute",top:-12,left:24,background:"var(--accent)",color:"#ffffff",padding:"4px 12px",fontFamily:"var(--mono)",fontSize:10,letterSpacing:"0.14em",textTransform:"uppercase",fontWeight:600,borderRadius:999}}>
-                    Most picked
+                    {isMK ? "Најпопуларен" : "Most picked"}
                   </div>
                 )}
                 <div style={{marginBottom:20}}>
@@ -158,7 +167,7 @@ function PricingPage({ setRoute, lang }) {
                 <a className={t.featured ? "btn btn-accent" : "btn btn-ghost"}
                    onClick={() => setRoute("contact")}
                    style={{justifyContent:"center"}}>
-                  Get started <span className="arrow">→</span>
+                  {isMK ? "Започнете" : "Get started"} <span className="arrow">→</span>
                 </a>
               </div>
             ))}
@@ -171,10 +180,10 @@ function PricingPage({ setRoute, lang }) {
         <div className="wrap">
           <div style={{display:"flex", justifyContent:"space-between", alignItems:"flex-end", marginBottom:48, flexWrap:"wrap", gap:20}}>
             <div>
-              <div className="eyebrow" style={{marginBottom:12}}>Paid acquisition</div>
-              <h2 className="display upright h-display-sm" style={{margin:0}}>Management fee.</h2>
+              <div className="eyebrow" style={{marginBottom:12}}>{isMK ? "Платена аквизиција" : "Paid acquisition"}</div>
+              <h2 className="display upright h-display-sm" style={{margin:0}}>{isMK ? "Надомест за управување." : "Management fee."}</h2>
             </div>
-            <p className="muted" style={{maxWidth:"44ch", fontSize:15, margin:0, lineHeight:1.55}}>A flat retainer for setup and creative, plus a small % of media spend. No long-term lock-in.</p>
+            <p className="muted" style={{maxWidth:"44ch", fontSize:15, margin:0, lineHeight:1.55}}>{isMK ? "Рамен ретенер за поставување и креатива, плус мал процент од буџетот за огласување. Без долгорочно врзување." : "A flat retainer for setup and creative, plus a small % of media spend. No long-term lock-in."}</p>
           </div>
 
           <window.StaggerReveal className="pricing-ads-tiers" style={{}} baseDelay={0.05} stagger={0.12}>
@@ -194,7 +203,7 @@ function PricingPage({ setRoute, lang }) {
               }}>
                 {t.featured && (
                   <div style={{position:"absolute",top:-12,left:24,background:"var(--accent)",color:"#ffffff",padding:"4px 12px",fontFamily:"var(--mono)",fontSize:10,letterSpacing:"0.14em",textTransform:"uppercase",fontWeight:600,borderRadius:999}}>
-                    Most picked
+                    {isMK ? "Најпопуларен" : "Most picked"}
                   </div>
                 )}
                 <div style={{marginBottom:20}}>
@@ -204,7 +213,7 @@ function PricingPage({ setRoute, lang }) {
 
                 <div style={{padding:"18px 0",borderTop:t.featured?"1px solid rgba(255,255,255,0.12)":"1px solid var(--hairline)",borderBottom:t.featured?"1px solid rgba(255,255,255,0.12)":"1px solid var(--hairline)",marginBottom:20}}>
                   <span style={{fontFamily:"var(--display)",fontWeight:700,fontSize:32,letterSpacing:"-0.035em",color:t.featured?"#7eb3ff":"var(--accent)"}}>{t.fee}</span>
-                  <div style={{fontFamily:"var(--mono)",fontSize:10,letterSpacing:"0.12em",textTransform:"uppercase",color:t.featured?"rgba(255,255,255,0.4)":"var(--ink-2)",marginTop:6}}>+ % of media spend</div>
+                  <div style={{fontFamily:"var(--mono)",fontSize:10,letterSpacing:"0.12em",textTransform:"uppercase",color:t.featured?"rgba(255,255,255,0.4)":"var(--ink-2)",marginTop:6}}>{isMK ? "+ % од буџетот за огласи" : "+ % of media spend"}</div>
                 </div>
 
                 <ul className="clean" style={{flex:1,display:"flex",flexDirection:"column",gap:0,marginBottom:24}}>
@@ -219,7 +228,7 @@ function PricingPage({ setRoute, lang }) {
                 <a className={t.featured ? "btn btn-accent" : "btn btn-ghost"}
                    onClick={() => setRoute("contact")}
                    style={{justifyContent:"center"}}>
-                  Get started <span className="arrow">→</span>
+                  {isMK ? "Започнете" : "Get started"} <span className="arrow">→</span>
                 </a>
               </div>
             ))}
@@ -256,9 +265,9 @@ function PricingPage({ setRoute, lang }) {
 
       <CTASection
         setRoute={setRoute}
-        title={<>Not sure<br/>which fits?</>}
-        description="We'll listen to where you are, run the math, and recommend the smallest possible package that gets you what you want."
-        buttonText="Talk to us"
+        title={isMK ? <>Не сте сигурни<br/>кое одговара?</> : <>Not sure<br/>which fits?</>}
+        description={isMK ? "Ќе ве слушнеме, ќе ги пресметаме бројките и ќе препорачаме најмал можен пакет кој ви носи тоа што го сакате." : "We'll listen to where you are, run the math, and recommend the smallest possible package that gets you what you want."}
+        buttonText={isMK ? "Разговарајте со нас" : "Talk to us"}
       />
     </div>
   );

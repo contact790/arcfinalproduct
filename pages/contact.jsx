@@ -233,8 +233,8 @@ function ContactPage({ setRoute, lang }) {
               <h1 className="display upright" style={{margin:0, fontSize:"clamp(48px, 6.2vw, 92px)", fontWeight:700, letterSpacing:"-0.04em", lineHeight:1.02, color:"#ffffff"}}>
                 {isMK ? (
                   <>
-                    <span style={{display:"block"}}>Да направиме нешто</span>
-                    <span style={{display:"block"}}>кое <span style={{color:"var(--accent)"}}>се враќа</span>.</span>
+                    <span style={{display:"block"}}>Да изградиме нешто</span>
+                    <span style={{display:"block"}}>што <span style={{color:"var(--accent)"}}>се исплаќа</span>.</span>
                   </>
                 ) : (
                   <>
@@ -246,10 +246,10 @@ function ContactPage({ setRoute, lang }) {
             </div>
             <div>
               <p style={{fontSize:19, lineHeight:1.5, maxWidth:"40ch", color:"rgba(255,255,255,0.85)", margin:"0 0 28px"}}>
-                {isMK ? "Пополнете го формуларот, закажете повик или само испратете имејл. Одговараме истиот ден во работни денови. Без drip кампањи, без игри со календарот." : "Fill out the form, book a call, or just email. We answer the same day on weekdays. No drip campaigns, no calendar games."}
+                {isMK ? "Пополнете го формуларот, закажете повик или едноставно испратете имејл. Одговараме во текот на истиот работен ден. Без маркетиншки секвенци, без игри со распоредот." : "Fill out the form, book a call, or just email. We answer the same day on weekdays. No drip campaigns, no calendar games."}
               </p>
               <div style={{display:"flex", gap:24, flexWrap:"wrap"}}>
-                {[["📬", "contact@arcaiagency.net"], ["📍", "Skopje, Macedonia"], ["⏱", isMK ? "Одговор за &lt;4 часа" : "Reply in &lt;4 hours"]].map(([icon, text], i) => (
+                {[["📬", "contact@arcaiagency.net"], ["📍", isMK ? "Скопје, Македонија" : "Skopje, Macedonia"], ["⏱", isMK ? "Одговор до 4 часа" : "Reply in &lt;4 hours"]].map(([icon, text], i) => (
                   <div key={i} style={{display:"flex", alignItems:"center", gap:8}}>
                     <span style={{fontSize:16}}>{icon}</span>
                     <span style={{fontSize:14, color:"rgba(255,255,255,0.75)"}} dangerouslySetInnerHTML={{__html: text}} />
@@ -268,7 +268,7 @@ function ContactPage({ setRoute, lang }) {
           {/* LEFT — Form */}
           <div>
             <h2 className="display upright" style={{fontSize:44, margin:"0 0 36px", letterSpacing:"-0.03em", fontWeight:700}}>
-              {isMK ? "Испрати брифинг" : "Send a brief"}
+              {isMK ? "Испратете брифинг" : "Send a brief"}
             </h2>
 
             <form onSubmit={submit} style={{display:"flex", flexDirection:"column", gap:28}}>
@@ -289,7 +289,7 @@ function ContactPage({ setRoute, lang }) {
               </div>
 
               <div className="field">
-                <label>Project budget</label>
+                <label>{isMK ? "Буџет за проектот" : "Project budget"}</label>
                 <div style={{display:"flex", gap:8, flexWrap:"wrap"}}>
                   {budgets.map((b) => (
                     <button key={b} type="button"
@@ -302,9 +302,9 @@ function ContactPage({ setRoute, lang }) {
               </div>
 
               <div className="field">
-                <label htmlFor="message">{isMK ? "Кажете ни за тоа" : "Tell us about it"}</label>
+                <label htmlFor="message">{isMK ? "Раскажете ни повеќе" : "Tell us about it"}</label>
                 <textarea className="textarea" id="message" rows="5" required
-                          placeholder={isMK ? "Што градите, што работи, што не…" : "What are you building, what's working, what isn't…"}
+                          placeholder={isMK ? "Што градите, што функционира, што не…" : "What are you building, what's working, what isn't…"}
                           value={form.message}
                           onChange={(e) => setForm({...form, message: e.target.value})} />
               </div>
@@ -322,14 +322,14 @@ function ContactPage({ setRoute, lang }) {
             {/* Direct lines */}
             <div style={{marginTop:64, paddingTop:32, borderTop:"1px solid var(--hairline-strong)"}}>
               <h3 className="display upright" style={{fontSize:32, margin:"0 0 28px", letterSpacing:"-0.03em", fontWeight:700}}>
-                {isMK ? "Или контактирајте не директно" : "Or reach us directly"}
+                {isMK ? "Или контактирајте нè директно" : "Or reach us directly"}
               </h3>
               <div className="contact-direct-grid">
                 {(isMK ? [
-                  ["Имејл",       "contact@arcaiagency.net"],
-                  ["Студио",      "Скопје, Македонија"],
+                  ["Имејл",        "contact@arcaiagency.net"],
+                  ["Студио",       "Скопје, Македонија"],
                   ["Работно време","Пон–Пет, CET"],
-                  ["Социјални",   "LinkedIn, Instagram"],
+                  ["Социјални",    "LinkedIn, Instagram"],
                 ] : [
                   ["Email",  "contact@arcaiagency.net"],
                   ["Studio", "Skopje, Macedonia"],
@@ -348,7 +348,7 @@ function ContactPage({ setRoute, lang }) {
           {/* RIGHT — Booking */}
           <div>
             <h2 className="display upright" style={{fontSize:44, margin:"0 0 36px", letterSpacing:"-0.03em", fontWeight:700}}>
-              Or book a call
+              {isMK ? "Или закажете повик" : "Or book a call"}
             </h2>
 
             {/* Booking card */}
@@ -361,21 +361,23 @@ function ContactPage({ setRoute, lang }) {
                   </div>
                   <div style={{display:"flex", alignItems:"center", gap:6, background:"rgba(34,197,94,0.08)", border:"1px solid rgba(34,197,94,0.2)", borderRadius:999, padding:"5px 12px"}}>
                     <div className="mockup-live-dot" style={{width:6, height:6, borderRadius:"50%", background:"#22c55e"}}></div>
-                    <span style={{fontSize:11, color:"#22c55e", fontWeight:600}}>Accepting bookings</span>
+                    <span style={{fontSize:11, color:"#22c55e", fontWeight:600}}>{isMK ? "Отворено за закажување" : "Accepting bookings"}</span>
                   </div>
                 </div>
-                <h3 className="display upright" style={{fontSize:28, margin:"0 0 8px", letterSpacing:"-0.03em", fontWeight:700}}>30-min Discovery Call</h3>
+                <h3 className="display upright" style={{fontSize:28, margin:"0 0 8px", letterSpacing:"-0.03em", fontWeight:700}}>
+                  {isMK ? "30-мин откривачки повик" : "30-min Discovery Call"}
+                </h3>
                 <p className="muted" style={{margin:0, fontSize:15, lineHeight:1.6}}>
-                  A short call to audit your site or ad account live — we'll tell you two or three things to fix this week, paid or not.
+                  {isMK ? "Краток повик за ревизија на вашиот сајт или рекламна сметка — ќе ви посочиме две-три конкретни подобрувања уште оваа недела, платено или не." : "A short call to audit your site or ad account live — we'll tell you two or three things to fix this week, paid or not."}
                 </p>
               </div>
 
               {/* Middle: details */}
               <div style={{padding:"24px 32px", borderBottom:"1px solid var(--hairline)", display:"flex", flexDirection:"column", gap:14}}>
                 {[
-                  [<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.4"/><path d="M8 5v3.5l2 2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>, "30 minutes"],
-                  [<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.4"/><path d="M5 8h6M5 5h3M5 11h4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/></svg>, "Free — no credit card"],
-                  [<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2a6 6 0 1 0 0 12A6 6 0 0 0 8 2z" stroke="currentColor" strokeWidth="1.4"/><path d="M5.5 8.5c.5.8 1.4 1.5 2.5 1.5s2-.7 2.5-1.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/><circle cx="6" cy="6.5" r=".8" fill="currentColor"/><circle cx="10" cy="6.5" r=".8" fill="currentColor"/></svg>, "Google Meet or Zoom — your pick"],
+                  [<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="currentColor" strokeWidth="1.4"/><path d="M8 5v3.5l2 2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/></svg>, isMK ? "30 минути" : "30 minutes"],
+                  [<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.4"/><path d="M5 8h6M5 5h3M5 11h4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/></svg>, isMK ? "Бесплатно — без кредитна картичка" : "Free — no credit card"],
+                  [<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2a6 6 0 1 0 0 12A6 6 0 0 0 8 2z" stroke="currentColor" strokeWidth="1.4"/><path d="M5.5 8.5c.5.8 1.4 1.5 2.5 1.5s2-.7 2.5-1.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/><circle cx="6" cy="6.5" r=".8" fill="currentColor"/><circle cx="10" cy="6.5" r=".8" fill="currentColor"/></svg>, isMK ? "Google Meet или Zoom — по ваш избор" : "Google Meet or Zoom — your pick"],
                 ].map(([icon, text], i) => (
                   <div key={i} style={{display:"flex", alignItems:"center", gap:10}}>
                     <span style={{color:"var(--accent)", flexShrink:0}}>{icon}</span>
@@ -389,10 +391,10 @@ function ContactPage({ setRoute, lang }) {
                 <a href="https://cal.eu/marko-stefkovski-eindak/30min" target="_blank" rel="noopener noreferrer"
                    className="btn btn-accent btn-lg"
                    style={{width:"100%", justifyContent:"center", textDecoration:"none"}}>
-                  Pick a time on Cal.com <span className="arrow">→</span>
+                  {isMK ? "Изберете термин на Cal.com" : "Pick a time on Cal.com"} <span className="arrow">→</span>
                 </a>
                 <p className="muted" style={{fontSize:12, textAlign:"center", marginTop:12, marginBottom:0}}>
-                  Opens Cal.com — pick a slot, add your details, done.
+                  {isMK ? "Се отвора Cal.com — изберете термин, додадете детали, готово." : "Opens Cal.com — pick a slot, add your details, done."}
                 </p>
               </div>
             </div>
@@ -403,8 +405,8 @@ function ContactPage({ setRoute, lang }) {
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l1.8 5.5H18l-4.9 3.6 1.9 5.5L10 13l-5 3.6 1.9-5.5L2 7.5h6.2L10 2z" fill="#fff"/></svg>
               </div>
               <div>
-                <div style={{fontWeight:600, fontSize:15}}>Free audit on the first call</div>
-                <div className="muted" style={{fontSize:13, marginTop:2}}>Site or ad account, your pick. No strings.</div>
+                <div style={{fontWeight:600, fontSize:15}}>{isMK ? "Бесплатна ревизија на првиот повик" : "Free audit on the first call"}</div>
+                <div className="muted" style={{fontSize:13, marginTop:2}}>{isMK ? "Сајт или рекламна сметка, по ваш избор. Без обврски." : "Site or ad account, your pick. No strings."}</div>
               </div>
             </div>
           </div>
@@ -417,9 +419,14 @@ function ContactPage({ setRoute, lang }) {
           <div className="contact-faq-grid" style={{alignItems:"start"}}>
             <div>
               <div className="eyebrow" style={{marginBottom:16}}>FAQ</div>
-              <h2 className="display upright h-display-sm" style={{margin:0, maxWidth:"12ch"}}>Quick answers.</h2>
+              <h2 className="display upright h-display-sm" style={{margin:0, maxWidth:"12ch"}}>{isMK ? "Брзи одговори." : "Quick answers."}</h2>
             </div>
-            <FAQAccordion items={[
+            <FAQAccordion items={isMK ? [
+              ["Колкав е типичниот временски период?",  "Повеќето веб сајтови траат четири до осум недели. Рекламните кампањи можат да бидат активни за недела-две ако креативата е подготвена."],
+              ["Дали нудите тековна поддршка?",          "Да — сите пакети вклучуваат поддршка по лансирање. Нудиме и месечни ретенери."],
+              ["Како функционира плаќањето?",            "Половина на стартување, половина на испорака за сајтови. Месечна наплата за ретенери."],
+              ["Дали работите со стартапи?",             "Да. Имаме Starter ниво специјално создадено за тимови во рана фаза на развој."],
+            ] : [
               ["What's the typical project timeline?",  "Most websites take four to eight weeks. Ad campaigns can launch in a week or two if creative is ready."],
               ["Do you offer ongoing support?",         "Yes — all packages include post-launch support. We also offer monthly retainers."],
               ["How does payment work?",                "Half on kickoff, half on delivery for sites. Monthly billing for paid retainers."],
@@ -431,8 +438,8 @@ function ContactPage({ setRoute, lang }) {
 
       <CTASection
         setRoute={setRoute}
-        title={<>Still on<br/>the fence?</>}
-        description="Send a one-line email. We'll reply with a couple of honest questions — no sales sequence."
+        title={isMK ? <>Сè уште<br/>двоумите?</> : <>Still on<br/>the fence?</>}
+        description={isMK ? "Испратете еден ред имејл. Ќе одговориме со неколку искрени прашања — без продажни секвенци." : "Send a one-line email. We'll reply with a couple of honest questions — no sales sequence."}
         buttonText="contact@arcaiagency.net"
       />
     </div>

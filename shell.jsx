@@ -68,31 +68,34 @@ function Nav({ route, setRoute, className, lang, setLang }) {
               </a>
             ))}
           </div>
-          {setLang && (
-            <button
-              onClick={() => setLang(lang === "en" ? "mk" : "en")}
-              style={{
-                padding:"8px 14px",
-                borderRadius:8,
-                border:"1px solid var(--hairline-strong)",
-                background:"transparent",
-                fontFamily:"var(--mono)",
-                fontSize:11,
-                fontWeight:700,
-                letterSpacing:"0.1em",
-                color:"var(--ink)",
-                cursor:"pointer",
-                textTransform:"uppercase",
-                transition:"background 0.15s ease, color 0.15s ease",
-              }}
-              aria-label="Toggle language"
-            >
-              {lang === "en" ? "MK" : "EN"}
-            </button>
-          )}
-          <a className="btn btn-accent nav-cta-desktop" onClick={() => navigate("contact")} style={{padding:"10px 20px", fontSize:13.5, borderRadius:10}}>
-            {lang === "mk" ? "Започни проект" : "Start a project"} <span className="arrow">→</span>
-          </a>
+          <div style={{display:"flex", alignItems:"center", gap:8}}>
+            {setLang && (
+              <button
+                onClick={() => setLang(lang === "en" ? "mk" : "en")}
+                style={{
+                  padding:"8px 14px",
+                  borderRadius:8,
+                  border:"1px solid var(--hairline-strong)",
+                  background:"transparent",
+                  fontFamily:"var(--mono)",
+                  fontSize:11,
+                  fontWeight:700,
+                  letterSpacing:"0.1em",
+                  color:"var(--ink)",
+                  cursor:"pointer",
+                  textTransform:"uppercase",
+                  transition:"background 0.15s ease, color 0.15s ease",
+                  whiteSpace:"nowrap",
+                }}
+                aria-label="Toggle language"
+              >
+                {lang === "en" ? "MK" : "EN"}
+              </button>
+            )}
+            <a className="btn btn-accent nav-cta-desktop" onClick={() => navigate("contact")} style={{padding:"10px 20px", fontSize:13.5, borderRadius:10}}>
+              {lang === "mk" ? "Започни проект" : "Start a project"} <span className="arrow">→</span>
+            </a>
+          </div>
           <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
             <span className={"ham-line" + (menuOpen ? " open" : "")}></span>
             <span className={"ham-line" + (menuOpen ? " open" : "")}></span>

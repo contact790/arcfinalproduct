@@ -58,7 +58,7 @@ html {
 html, body {
   margin: 0;
   padding: 0;
-  background: #ffffff;
+  background: #1245e8;
   color: var(--ink);
   font-family: var(--grotesk);
   font-size: 16px;
@@ -76,7 +76,7 @@ a, button, [role="button"], .btn, .nav-link, .work-card, .filter-pill, .cal-day,
 
 /* Hero gradient — applied directly to the hero section */
 .hero-section {
-  background: linear-gradient(180deg, #1245e8 0%, #2d5fff 26%, #6b94ff 56%, #c8d9ff 78%, #f0f5ff 92%, #ffffff 100%);
+  background: linear-gradient(180deg, #1245e8 0%, #2d5fff 26%, #6b94ff 56%, #c8d9ff 78%, #f0f5ff 92%, var(--paper) 100%);
   /* pull up behind the sticky nav (nav height 56px + 14px padding top = 84px) */
   margin-top: -84px;
   padding-top: 84px;
@@ -585,7 +585,7 @@ ul.clean { list-style: none; padding: 0; margin: 0; }
 
 /* ----- Inner page hero (non-home pages) ----- */
 .page-hero {
-  background: linear-gradient(180deg, #1245e8 0%, #2d5fff 30%, #6b94ff 62%, #c8d9ff 82%, #f0f5ff 94%, #ffffff 100%);
+  background: linear-gradient(180deg, #1245e8 0%, #2d5fff 30%, #6b94ff 62%, #c8d9ff 82%, #f0f5ff 94%, var(--paper) 100%);
   margin-top: -84px;
   padding-top: 184px;
   padding-bottom: 80px;

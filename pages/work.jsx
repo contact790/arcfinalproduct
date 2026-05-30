@@ -453,7 +453,8 @@ const WORK_ITEMS = [
   { id: 8, title: "Studio Folder", category: "web",  desc: "Portfolio site for a creative studio with a smooth case-study pipeline.", result: "More inbound inquiries", metric: "+120% inbound" },
 ];
 
-function WorkPage({ setRoute }) {
+function WorkPage({ setRoute, lang }) {
+  const isMK = lang === "mk";
 
   return (
     <div className="page-enter">
@@ -462,18 +463,27 @@ function WorkPage({ setRoute }) {
         <div className="wrap">
           <div className="work-hero-grid" style={{alignItems:"end", position:"relative", zIndex:1}}>
             <div>
-              <div className="eyebrow" style={{marginBottom:24, color:"#ffffff"}}>Portfolio</div>
+              <div className="eyebrow" style={{marginBottom:24, color:"#ffffff"}}>{isMK ? "Портфолио" : "Portfolio"}</div>
               <h1 className="display upright" style={{margin:0, fontSize:"clamp(48px, 6.2vw, 92px)", fontWeight:700, letterSpacing:"-0.04em", lineHeight:1.02, color:"#ffffff"}}>
-                <span style={{display:"block"}}>Selected <span style={{color:"var(--accent)"}}>work</span>,</span>
-                <span style={{display:"block"}}>recent and real.</span>
+                {isMK ? (
+                  <>
+                    <span style={{display:"block"}}>Избрани <span style={{color:"var(--accent)"}}>проекти</span>,</span>
+                    <span style={{display:"block"}}>скорешни и реални.</span>
+                  </>
+                ) : (
+                  <>
+                    <span style={{display:"block"}}>Selected <span style={{color:"var(--accent)"}}>work</span>,</span>
+                    <span style={{display:"block"}}>recent and real.</span>
+                  </>
+                )}
               </h1>
             </div>
             <div>
               <p style={{fontSize:19, lineHeight:1.5, maxWidth:"40ch", color:"rgba(255,255,255,0.85)", margin:"0 0 32px"}}>
-                A handful of projects from the last two years. Each one lists the outcome we cared about — not the prettiest screenshot.
+                {isMK ? "Избор на проекти од последните две години. Секој прикажува конкретен резултат — не само убава снимка." : "A handful of projects from the last two years. Each one lists the outcome we cared about — not the prettiest screenshot."}
               </p>
               <a className="btn btn-accent btn-lg" onClick={() => setRoute("contact")}>
-                Start your project <span className="arrow">→</span>
+                {isMK ? "Започнете го вашиот проект" : "Start your project"} <span className="arrow">→</span>
               </a>
             </div>
           </div>
@@ -485,9 +495,9 @@ function WorkPage({ setRoute }) {
         <div className="wrap">
           <div style={{marginBottom:56}}>
             <h2 className="display upright" style={{fontSize:40, margin:0, letterSpacing:"-0.03em", fontWeight:700}}>
-              Selected work.
+              {isMK ? "Избрани проекти." : "Selected work."}
             </h2>
-            <p className="muted" style={{margin:"16px 0 0", fontSize:16, lineHeight:1.55, maxWidth:"54ch"}}>Launching soon. Three live sites built by us — real products, real outcomes, no mockups.</p>
+            <p className="muted" style={{margin:"16px 0 0", fontSize:16, lineHeight:1.55, maxWidth:"54ch"}}>{isMK ? "Наскоро. Три активни сајтови изработени од нас — реални производи, реални резултати, без макети." : "Launching soon. Three live sites built by us — real products, real outcomes, no mockups."}</p>
           </div>
 
           <window.StaggerReveal className="work-cards-grid" style={{}} baseDelay={0.1} stagger={0.12}>
@@ -498,8 +508,8 @@ function WorkPage({ setRoute }) {
                     <span style={{fontFamily:"var(--mono)", fontSize:18, color:"var(--ink-2)"}}>0{n}</span>
                   </div>
                   <div style={{textAlign:"center"}}>
-                    <div className="eyebrow" style={{marginBottom:8}}>Coming soon</div>
-                    <p className="muted" style={{margin:0, fontSize:13, lineHeight:1.5, maxWidth:"22ch"}}>Live demo site in production. Dropping shortly.</p>
+                    <div className="eyebrow" style={{marginBottom:8}}>{isMK ? "Наскоро" : "Coming soon"}</div>
+                    <p className="muted" style={{margin:0, fontSize:13, lineHeight:1.5, maxWidth:"22ch"}}>{isMK ? "Активен демо сајт во изработка. Достапен наскоро." : "Live demo site in production. Dropping shortly."}</p>
                   </div>
                 </div>
                 <div style={{padding:"24px 28px 28px", borderTop:"1px dashed var(--hairline-strong)"}}>
@@ -515,12 +525,13 @@ function WorkPage({ setRoute }) {
 
       <CTASection
         setRoute={setRoute}
-        title={<>Want results<br/>like these?</>}
-        description="The next case study could be yours. We'll happily audit your current site or ad account and tell you where the leak is."
-        buttonText="Start your project"
+        title={isMK ? <>Сакате резултати<br/>како овие?</> : <>Want results<br/>like these?</>}
+        description={isMK ? "Следната студија на случај може да биде ваша. Со задоволство ќе ја ревидираме вашата страница или рекламна сметка и ќе ви кажеме каде е проблемот." : "The next case study could be yours. We'll happily audit your current site or ad account and tell you where the leak is."}
+        buttonText={isMK ? "Започнете го вашиот проект" : "Start your project"}
       />
     </div>
   );
 }
 
 window.WorkPage = WorkPage;
+
