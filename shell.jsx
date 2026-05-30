@@ -23,7 +23,7 @@ function ScrollProgress() {
 }
 
 // ---------------- Nav ----------------
-function Nav({ route, setRoute, className }) {
+function Nav({ route, setRoute, className, lang, setLang }) {
   const [scrolled, setScrolled] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
   React.useEffect(() => {
@@ -32,12 +32,13 @@ function Nav({ route, setRoute, className }) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const isMK = lang === "mk";
   const items = [
-    { id: "home",     label: "Home" },
-    { id: "services", label: "Services" },
-    { id: "work",     label: "Work" },
-    { id: "pricing",  label: "Pricing" },
-    { id: "contact",  label: "Contact" },
+    { id: "home",     label: isMK ? "Почетна" : "Home" },
+    { id: "services", label: isMK ? "Услуги" : "Services" },
+    { id: "work",     label: isMK ? "Работи" : "Work" },
+    { id: "pricing",  label: isMK ? "Цени" : "Pricing" },
+    { id: "contact",  label: isMK ? "Контакт" : "Contact" },
   ];
 
   function navigate(id) {
@@ -67,8 +68,30 @@ function Nav({ route, setRoute, className }) {
               </a>
             ))}
           </div>
+          {setLang && (
+            <button
+              onClick={() => setLang(lang === "en" ? "mk" : "en")}
+              style={{
+                padding:"8px 14px",
+                borderRadius:8,
+                border:"1px solid var(--hairline-strong)",
+                background:"transparent",
+                fontFamily:"var(--mono)",
+                fontSize:11,
+                fontWeight:700,
+                letterSpacing:"0.1em",
+                color:"var(--ink)",
+                cursor:"pointer",
+                textTransform:"uppercase",
+                transition:"background 0.15s ease, color 0.15s ease",
+              }}
+              aria-label="Toggle language"
+            >
+              {lang === "en" ? "MK" : "EN"}
+            </button>
+          )}
           <a className="btn btn-accent nav-cta-desktop" onClick={() => navigate("contact")} style={{padding:"10px 20px", fontSize:13.5, borderRadius:10}}>
-            Start a project <span className="arrow">→</span>
+            {lang === "mk" ? "Започни проект" : "Start a project"} <span className="arrow">→</span>
           </a>
           <button className="nav-hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
             <span className={"ham-line" + (menuOpen ? " open" : "")}></span>
@@ -87,8 +110,30 @@ function Nav({ route, setRoute, className }) {
             </a>
           ))}
           <a className="btn btn-accent" onClick={() => navigate("contact")} style={{marginTop:8, width:"100%", justifyContent:"center"}}>
-            Start a project <span className="arrow">→</span>
+            {lang === "mk" ? "Започни проект" : "Start a project"} <span className="arrow">→</span>
           </a>
+          {setLang && (
+            <button
+              onClick={() => setLang(lang === "en" ? "mk" : "en")}
+              style={{
+                marginTop:8,
+                padding:"11px 14px",
+                borderRadius:8,
+                border:"1px solid var(--hairline-strong)",
+                background:"transparent",
+                fontFamily:"var(--mono)",
+                fontSize:12,
+                fontWeight:700,
+                letterSpacing:"0.1em",
+                color:"var(--ink)",
+                cursor:"pointer",
+                textTransform:"uppercase",
+                width:"100%",
+              }}
+            >
+              {lang === "en" ? "Македонски (MK)" : "English (EN)"}
+            </button>
+          )}
         </div>
       )}
     </>
@@ -141,40 +186,56 @@ function CTASection({ title, description, buttonText, setRoute }) {
 }
 
 // ---------------- Footer ----------------
-function Footer({ setRoute }) {
+function Footer({ setRoute, lang }) {
+  const isMK = lang === "mk";
   return (
     <footer className="footer">
       <div className="wrap">
         <div className="footer-grid">
           <div>
             <h3 className="display upright" style={{fontSize:56, margin:0, lineHeight:0.95, letterSpacing:"-0.03em", color:"var(--ink)"}}>
-              Let's make<br/>numbers move.
+              {isMK ? <>Да ги<br/>поместиме броевите.</> : <>Let's make<br/>numbers move.</>}
             </h3>
             <a className="btn btn-accent" style={{marginTop:32}} onClick={() => setRoute("contact")}>
-              Start a project <span className="arrow">→</span>
+              {isMK ? "Започни проект" : "Start a project"} <span className="arrow">→</span>
             </a>
             <div style={{marginTop:20, fontSize:14, color:"var(--muted)"}}>contact@arcaiagency.net</div>
           </div>
           <div>
-            <div className="eyebrow" style={{marginBottom:18}}>Site</div>
+            <div className="eyebrow" style={{marginBottom:18}}>{isMK ? "Страница" : "Site"}</div>
             <ul className="clean" style={{display:"flex", flexDirection:"column", gap:10, fontSize:14}}>
-              {[["home","Index"],["services","Services"],["work","Work"],["pricing","Pricing"],["contact","Contact"]].map(([id,label]) => (
+              {(isMK
+                ? [["home","Почетна"],["services","Услуги"],["work","Работи"],["pricing","Цени"],["contact","Контакт"]]
+                : [["home","Index"],["services","Services"],["work","Work"],["pricing","Pricing"],["contact","Contact"]]
+              ).map(([id,label]) => (
                 <li key={id} style={{cursor:"pointer"}} onClick={() => setRoute(id)}>{label}</li>
               ))}
             </ul>
           </div>
           <div>
-            <div className="eyebrow" style={{marginBottom:18}}>Practice</div>
+            <div className="eyebrow" style={{marginBottom:18}}>{isMK ? "Практика" : "Practice"}</div>
             <ul className="clean" style={{display:"flex", flexDirection:"column", gap:10, fontSize:14}}>
-              <li>Web design</li>
-              <li>Web development</li>
-              <li>Paid acquisition</li>
-              <li>Meta &amp; Google Ads</li>
-              <li>Conversion design</li>
+              {isMK ? (
+                <>
+                  <li>Веб дизајн</li>
+                  <li>Веб развој</li>
+                  <li>Платено огласување</li>
+                  <li>Meta &amp; Google огласи</li>
+                  <li>Конверзиски дизајн</li>
+                </>
+              ) : (
+                <>
+                  <li>Web design</li>
+                  <li>Web development</li>
+                  <li>Paid acquisition</li>
+                  <li>Meta &amp; Google Ads</li>
+                  <li>Conversion design</li>
+                </>
+              )}
             </ul>
           </div>
           <div>
-            <div className="eyebrow" style={{marginBottom:18}}>Elsewhere</div>
+            <div className="eyebrow" style={{marginBottom:18}}>{isMK ? "Другаде" : "Elsewhere"}</div>
             <ul className="clean" style={{display:"flex", flexDirection:"column", gap:10, fontSize:14}}>
               <li>Instagram ↗</li>
               <li>LinkedIn ↗</li>
@@ -187,12 +248,12 @@ function Footer({ setRoute }) {
         <div style={{marginTop:72, paddingTop:24, borderTop:"1px solid var(--hairline-strong)", display:"flex", justifyContent:"space-between", flexWrap:"wrap", gap:16, alignItems:"center"}}>
           <img src="logo-arc-clean.png" alt="ARC" style={{height:26, width:"auto", display:"block", mixBlendMode:"multiply"}} />
           <div style={{display:"flex", gap:20, alignItems:"center", flexWrap:"wrap"}}>
-            <a onClick={() => setRoute("privacy")} style={{fontSize:11, letterSpacing:"0.1em", color:"var(--ink-2)", textTransform:"uppercase", fontFamily:"var(--mono)", cursor:"pointer"}}>Privacy Policy</a>
-            <a onClick={() => setRoute("terms")} style={{fontSize:11, letterSpacing:"0.1em", color:"var(--ink-2)", textTransform:"uppercase", fontFamily:"var(--mono)", cursor:"pointer"}}>Terms of Use</a>
+            <a onClick={() => setRoute("privacy")} style={{fontSize:11, letterSpacing:"0.1em", color:"var(--ink-2)", textTransform:"uppercase", fontFamily:"var(--mono)", cursor:"pointer"}}>{isMK ? "Политика за приватност" : "Privacy Policy"}</a>
+            <a onClick={() => setRoute("terms")} style={{fontSize:11, letterSpacing:"0.1em", color:"var(--ink-2)", textTransform:"uppercase", fontFamily:"var(--mono)", cursor:"pointer"}}>{isMK ? "Услови за користење" : "Terms of Use"}</a>
             <span style={{fontSize:11, letterSpacing:"0.1em", color:"var(--ink-2)", textTransform:"uppercase", fontFamily:"var(--mono)"}}>© 2026 Arc AI Agency</span>
           </div>
           <div className="mono" style={{fontSize:11, letterSpacing:"0.14em", color:"var(--ink-2)", textTransform:"uppercase"}}>
-            San Francisco · Remote-first
+            Skopje, Macedonia · Remote-first
           </div>
         </div>
       </div>

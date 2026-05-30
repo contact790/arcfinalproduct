@@ -223,7 +223,8 @@ function WebsiteSwipe() {
   );
 }
 
-function HomePage({ setRoute }) {
+function HomePage({ setRoute, lang }) {
+  const isMK = lang === "mk";
   return (
     <div className="page-enter">
       {/* HERO */}
@@ -233,24 +234,24 @@ function HomePage({ setRoute }) {
             <div>
               <h1 className="display upright" style={{margin:0, fontSize:"clamp(48px, 5.5vw, 76px)", fontWeight:700, letterSpacing:"-0.04em", lineHeight:1.05, color:"#ffffff"}}>
                 <window.LineReveal delay={0.05}>
-                  Websites &amp; <span style={{color:"#a8c4ff"}}>paid ads</span>
+                  {isMK ? <>Веб сајтови &amp; <span style={{color:"#a8c4ff"}}>платени огласи</span></> : <>Websites &amp; <span style={{color:"#a8c4ff"}}>paid ads</span></>}
                 </window.LineReveal>
                 <window.LineReveal delay={0.18}>
-                  that <span style={{color:"#a8c4ff"}}>pay</span> for themselves.
+                  {isMK ? <>кои <span style={{color:"#a8c4ff"}}>се исплаќаат</span> сами.</> : <>that <span style={{color:"#a8c4ff"}}>pay</span> for themselves.</>}
                 </window.LineReveal>
               </h1>
               <window.Reveal delay={0.32} from="bottom">
                 <p className="muted" style={{fontSize:18, lineHeight:1.5, marginTop:28, maxWidth:"44ch"}}>
-                  We're a small studio. We make the website. We run the ads. We're judged by what comes back.
+                  {isMK ? "Мало студио. Ги правиме веб сајтовите. Ги водиме огласите. Судиме по тоа што се враќа." : "We're a small studio. We make the website. We run the ads. We're judged by what comes back."}
                 </p>
               </window.Reveal>
               <window.Reveal delay={0.42} from="bottom">
                 <div className="hero-btns" style={{display:"flex", gap:14, marginTop:32, flexWrap:"wrap"}}>
                   <a className="btn btn-accent btn-lg" onClick={() => setRoute("contact")}>
-                    Book a strategy call <span className="arrow">→</span>
+                    {isMK ? "Закажи стратешки повик" : "Book a strategy call"} <span className="arrow">→</span>
                   </a>
                   <a className="btn btn-lg btn-ghost" onClick={() => setRoute("pricing")}>
-                    See pricing
+                    {isMK ? "Види цени" : "See pricing"}
                   </a>
                 </div>
               </window.Reveal>
@@ -266,7 +267,7 @@ function HomePage({ setRoute }) {
       {/* TOOLS ROW */}
       <section style={{padding:"48px 0", borderTop:"1px solid var(--hairline)", borderBottom:"1px solid var(--hairline)"}}>
         <div className="wrap">
-          <div className="eyebrow" style={{textAlign:"center", marginBottom:32}}>Tools we work with every day</div>
+          <div className="eyebrow" style={{textAlign:"center", marginBottom:32}}>{isMK ? "Алатки со кои работиме секој ден" : "Tools we work with every day"}</div>
           <div className="tools-row" style={{display:"flex", justifyContent:"center", alignItems:"center", flexWrap:"wrap", gap:72}}>
             {[
               { name:"Meta",            color:"#0081FB", svg:<svg viewBox="0 0 24 24" style={{display:"block"}}><path fill="currentColor" d="M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973a6.624 6.624 0 0 0 .265.86 5.297 5.297 0 0 0 .371.761c.696 1.159 1.818 1.927 3.593 1.927 1.497 0 2.633-.671 3.965-2.444.76-1.012 1.144-1.626 2.663-4.32l.756-1.339.186-.325c.061.1.121.196.183.3l2.152 3.595c.724 1.21 1.665 2.556 2.47 3.314 1.046.987 1.992 1.22 3.06 1.22 1.075 0 1.876-.355 2.455-.843a3.743 3.743 0 0 0 .81-.973c.542-.939.861-2.127.861-3.745 0-2.72-.681-5.357-2.084-7.45-1.282-1.912-2.957-2.93-4.716-2.93-1.047 0-2.088.467-3.053 1.308-.652.57-1.257 1.29-1.82 2.05-.69-.875-1.335-1.547-1.958-2.056-1.182-.966-2.315-1.303-3.454-1.303zm10.16 2.053c1.147 0 2.188.758 2.992 1.999 1.132 1.748 1.647 4.195 1.647 6.4 0 1.548-.368 2.9-1.839 2.9-.58 0-1.027-.23-1.664-1.004-.496-.601-1.343-1.878-2.832-4.358l-.617-1.028a44.908 44.908 0 0 0-1.255-1.98c.07-.109.141-.224.211-.327 1.12-1.667 2.118-2.602 3.358-2.602zm-10.201.553c1.265 0 2.058.791 2.675 1.446.307.327.737.871 1.234 1.579l-1.02 1.566c-.757 1.163-1.882 3.017-2.837 4.338-1.191 1.649-1.81 1.817-2.486 1.817-.524 0-1.038-.237-1.383-.794-.263-.426-.464-1.13-.464-2.046 0-2.221.63-4.535 1.66-6.088.454-.687.964-1.226 1.533-1.533a2.264 2.264 0 0 1 1.088-.285z"/></svg> },
@@ -296,14 +297,14 @@ function HomePage({ setRoute }) {
         <div className="wrap">
           <div className="manifesto-grid" style={{alignItems:"start"}}>
             <window.LineReveal tag="p" className="display upright h-display-sm" style={{margin:0, maxWidth:"14ch"}}>
-              Most studios sell <span style={{color:"var(--accent)"}}><i>deliverables</i></span>. We sell outcomes.
+              {isMK ? <>Повеќето студија продаваат <span style={{color:"var(--accent)"}}><i>испораки</i></span>. Ние продаваме резултати.</> : <>Most studios sell <span style={{color:"var(--accent)"}}><i>deliverables</i></span>. We sell outcomes.</>}
             </window.LineReveal>
             <window.StaggerReveal baseDelay={0.1} stagger={0.12} style={{display:"flex", flexDirection:"column", gap:20, marginTop:20}}>
               <p className="muted" style={{margin:0, fontSize:17, lineHeight:1.6}}>
-                Editorial-grade web design, wired into rigorously measured paid acquisition. Every site is judged by what it pays back — not what it looks like in a portfolio shot.
+                {isMK ? "Уредничко-квалитетен веб дизајн, поврзан со строго измерена платена аквизиција. Секој сајт се судира по тоа што враќа — не по тоа како изгледа на снимки во портфолио." : "Editorial-grade web design, wired into rigorously measured paid acquisition. Every site is judged by what it pays back — not what it looks like in a portfolio shot."}
               </p>
               <p className="muted" style={{margin:0, fontSize:17, lineHeight:1.6}}>
-                We stay small on purpose. One strategist, one designer, one engineer, one media buyer per account.
+                {isMK ? "Останувамe мали намерно. Еден стратег, еден дизајнер, еден инженер, еден медиа купувач по сметка." : "We stay small on purpose. One strategist, one designer, one engineer, one media buyer per account."}
               </p>
             </window.StaggerReveal>
           </div>
@@ -316,14 +317,14 @@ function HomePage({ setRoute }) {
           <div style={{display:"flex", justifyContent:"space-between", alignItems:"flex-end", marginBottom:56, flexWrap:"wrap", gap:24}}>
             <div>
               <window.Reveal from="bottom" delay={0}>
-                <div className="eyebrow" style={{marginBottom:14}}>What we do</div>
+                <div className="eyebrow" style={{marginBottom:14}}>{isMK ? "Што правиме" : "What we do"}</div>
               </window.Reveal>
               <window.LineReveal delay={0.08}>
-                <h2 className="display upright h-display-sm" style={{margin:0, maxWidth:"16ch"}}>Two disciplines, one bottom line.</h2>
+                <h2 className="display upright h-display-sm" style={{margin:0, maxWidth:"16ch"}}>{isMK ? "Две дисциплини, еден краен резултат." : "Two disciplines, one bottom line."}</h2>
               </window.LineReveal>
             </div>
             <window.Reveal from="right" delay={0.15}>
-              <a className="btn btn-ghost" onClick={() => setRoute("services")}>View all services <span className="arrow">→</span></a>
+              <a className="btn btn-ghost" onClick={() => setRoute("services")}>{isMK ? "Види ги сите услуги" : "View all services"} <span className="arrow">→</span></a>
             </window.Reveal>
           </div>
 
@@ -368,13 +369,13 @@ function HomePage({ setRoute }) {
                 </div>
               </div>
               <div style={{padding:"28px 32px 32px"}}>
-                <div className="eyebrow" style={{marginBottom:12}}>Web design &amp; build</div>
-                <h3 className="display upright" style={{fontSize:34, margin:"0 0 14px", letterSpacing:"-0.03em", fontWeight:700}}>Websites</h3>
+                <div className="eyebrow" style={{marginBottom:12}}>{isMK ? "Веб дизајн &amp; развој" : "Web design & build"}</div>
+                <h3 className="display upright" style={{fontSize:34, margin:"0 0 14px", letterSpacing:"-0.03em", fontWeight:700}}>{isMK ? "Веб сајтови" : "Websites"}</h3>
                 <p className="muted" style={{margin:"0 0 24px", fontSize:15, lineHeight:1.55}}>
-                  Editorially designed, conversion-engineered. From a single landing page to multi-market commerce. Built in code, never templates.
+                  {isMK ? "Уредничко дизајнирани, оптимизирани за конверзија. Од единечна целна страница до мулти-пазарна трговија. Изградени во код, никогаш шаблони." : "Editorially designed, conversion-engineered. From a single landing page to multi-market commerce. Built in code, never templates."}
                 </p>
                 <div style={{display:"flex", gap:16, flexWrap:"wrap"}}>
-                  {["Custom design","Next.js / Webflow","Core Web Vitals"].map((t,k)=>(
+                  {(isMK ? ["Прилагоден дизајн","Next.js / Webflow","Core Web Vitals"] : ["Custom design","Next.js / Webflow","Core Web Vitals"]).map((t,k)=>(
                     <span key={k} style={{fontSize:12, color:"var(--ink-2)", background:"var(--paper-2)", border:"1px solid var(--hairline)", borderRadius:999, padding:"5px 12px", fontFamily:"var(--mono)", letterSpacing:"0.06em"}}>{t}</span>
                   ))}
                 </div>
@@ -467,13 +468,13 @@ function HomePage({ setRoute }) {
                 </div>
               </div>
               <div style={{padding:"28px 32px 32px"}}>
-                <div className="eyebrow" style={{marginBottom:12}}>Paid acquisition</div>
-                <h3 className="display upright" style={{fontSize:34, margin:"0 0 14px", letterSpacing:"-0.03em", fontWeight:700}}>Paid ads</h3>
+                <div className="eyebrow" style={{marginBottom:12}}>{isMK ? "Платена аквизиција" : "Paid acquisition"}</div>
+                <h3 className="display upright" style={{fontSize:34, margin:"0 0 14px", letterSpacing:"-0.03em", fontWeight:700}}>{isMK ? "Платени огласи" : "Paid ads"}</h3>
                 <p className="muted" style={{margin:"0 0 24px", fontSize:15, lineHeight:1.55}}>
-                  Meta and Google campaigns built on creative testing and tight measurement. We chase qualified pipeline, not vanity reach.
+                  {isMK ? "Meta и Google кампањи изградени врз тестирање на креатива и прецизно мерење. Го гониме квалификуваниот pipeline, не вонредниот досег." : "Meta and Google campaigns built on creative testing and tight measurement. We chase qualified pipeline, not vanity reach."}
                 </p>
                 <div style={{display:"flex", gap:16, flexWrap:"wrap"}}>
-                  {["Meta & Google","Creative testing","Attribution"].map((t,k)=>(
+                  {(isMK ? ["Meta & Google","Тестирање на креатива","Атрибуција"] : ["Meta & Google","Creative testing","Attribution"]).map((t,k)=>(
                     <span key={k} style={{fontSize:12, color:"var(--ink-2)", background:"var(--paper-2)", border:"1px solid var(--hairline)", borderRadius:999, padding:"5px 12px", fontFamily:"var(--mono)", letterSpacing:"0.06em"}}>{t}</span>
                   ))}
                 </div>
@@ -489,22 +490,27 @@ function HomePage({ setRoute }) {
           <div className="process-grid" style={{alignItems:"start"}}>
             <div>
               <window.Reveal from="bottom" delay={0}>
-                <div className="eyebrow" style={{marginBottom:20}}>How we work</div>
+                <div className="eyebrow" style={{marginBottom:20}}>{isMK ? "Како работиме" : "How we work"}</div>
               </window.Reveal>
               <window.LineReveal delay={0.1}>
-                <h2 className="display upright h-display-sm" style={{margin:"0 0 20px", maxWidth:"12ch"}}>From brief to live in weeks, not months.</h2>
+                <h2 className="display upright h-display-sm" style={{margin:"0 0 20px", maxWidth:"12ch"}}>{isMK ? "Од брифинг до живо за недели, не месеци." : "From brief to live in weeks, not months."}</h2>
               </window.LineReveal>
               <window.Reveal from="bottom" delay={0.22}>
-                <p className="muted" style={{fontSize:15, lineHeight:1.6, margin:0}}>Most engagements run four to eight weeks. You're never more than 48 hours from a decision.</p>
+                <p className="muted" style={{fontSize:15, lineHeight:1.6, margin:0}}>{isMK ? "Повеќето ангажмани траат четири до осум недели. Никогаш нема да чекате повеќе од 48 часа за одлука." : "Most engagements run four to eight weeks. You're never more than 48 hours from a decision."}</p>
               </window.Reveal>
             </div>
             <window.StaggerReveal baseDelay={0.05} stagger={0.1} from="bottom">
-              {[
+              {(isMK ? [
+                {num:"01", title:"Брифинг",   time:"Недела 1",    desc:"60-минутен повик, писмен опфат, фиксна цена во рок од 48 часа. Без ретенери додека не се договориме за бројка.", tags:["Откривачки повик","Писмен опфат"]},
+                {num:"02", title:"Стратегија",time:"Недела 1–2",  desc:"Мапа на публика, ревизија на понудата, KPI дрво и творечки брифинг. Сè во писмена форма пред да се нацрта и еден пиксел.", tags:["Мапа на публика","KPI дрво"]},
+                {num:"03", title:"Изградба",  time:"Недела 2–7",  desc:"Дизајнот и инженерингот работат паралелно. Едно Loom ажурирање секој петок. Без состаноци за статус.", tags:["Дизајн","Инженеринг","Loom ажурирања"]},
+                {num:"04", title:"Растење",   time:"Тековно",     desc:"Неделни тестови на креатива и итерации на сајтот. Писмен месечен ретро: што се сменило, што се поместило, што следи.", tags:["Неделни тестови","Месечни ретроспективи"]},
+              ] : [
                 {num:"01", title:"Brief",    time:"Week 1",    desc:"60-minute call, written scope, fixed price within 48 hours. No retainers until we agree on a number.",   tags:["Discovery call","Written scope"]},
                 {num:"02", title:"Strategy", time:"Week 1–2",  desc:"Audience map, offer audit, KPI tree, and creative brief. Everything in writing before a single pixel is drawn.", tags:["Audience map","KPI tree"]},
                 {num:"03", title:"Build",    time:"Week 2–7",  desc:"Design and engineering run in parallel. One Loom update every Friday. No status meetings.", tags:["Design","Engineering","Loom updates"]},
                 {num:"04", title:"Compound", time:"Ongoing",   desc:"Weekly creative tests and site iterations. A written monthly retro: what changed, what moved, what's next.", tags:["Weekly tests","Monthly retros"]},
-              ].map(({num,title,time,desc,tags},i) => (
+              ]).map(({num,title,time,desc,tags},i) => (
                 <div key={i} style={{display:"grid", gridTemplateColumns:"80px 1fr", gap:24, paddingBottom:32, marginBottom:i<3?32:0, borderBottom:i<3?"1px solid var(--hairline-strong)":"none"}}>
                   <div style={{paddingTop:4}}>
                     <div style={{fontFamily:"var(--mono)", fontSize:10, letterSpacing:"0.14em", textTransform:"uppercase", color:"var(--accent)", marginBottom:6}}>{num}</div>
@@ -532,15 +538,22 @@ function HomePage({ setRoute }) {
           <div className="faq-grid" style={{alignItems:"start"}}>
             <div>
               <div className="eyebrow" style={{marginBottom:16}}>FAQ</div>
-              <h2 className="display upright h-display-sm" style={{margin:0, maxWidth:"12ch"}}>Common questions.</h2>
+              <h2 className="display upright h-display-sm" style={{margin:0, maxWidth:"12ch"}}>{isMK ? "Чести прашања." : "Common questions."}</h2>
             </div>
-            <FAQAccordion items={[
+            <FAQAccordion items={isMK ? [
+              ["Колку трае еден проект?",               "Повеќето веб сајтови се испорачуваат за четири до осум недели. Платените кампањи можат да бидат активни за еден до две недели ако креативата е подготвена."],
+              ["Колку всушност чини?",                  "Фиксна цена — еднократна такса за поставување, рамен месечен ретенер. Без часовна наплата, без ненадејни трошоци. Ако надминеме, тоа е наш проблем."],
+              ["Дали работите само со големи брендови?","Не. Повеќето клиенти се во фаза seed до Series B. Имаме Starter ниво создадено специјално за тимови кои сè уште го бараат своето место."],
+              ["Можете ли да превземете постоечки сајт?","Честопати да. Прво правиме ревизија и искрено ви кажуваме дали е поевтино да го изградиме одново. Без притисок за дополнителна продажба."],
+              ["Каков е вашиот процес?",                "Брифинг → стратегија → изградба → раст. Добивате писмен опфат, неделни Loom ажурирања и месечен ретро. Без состаноци за статус."],
+              ["Каде е базиран тимот?",                 "Правен субјект во Скопје, Македонија."],
+            ] : [
               ["How long does a project take?",      "Most websites ship in four to eight weeks. Paid campaigns can go live in one to two weeks if creative is ready."],
               ["What does it actually cost?",        "Fixed pricing — setup fee once, flat monthly retainer. No hourly billing, no scope creep surprises. If we go over, that's on us."],
               ["Do you only work with big brands?",  "No. Most clients are seed to Series B. We have a Starter tier built specifically for teams that are still finding traction."],
               ["Can you take over an existing site?","Often yes. We audit first and tell you honestly if a rebuild is cheaper than a rescue. No upsell pressure."],
               ["What's your process?",               "Brief → strategy → build → compound. You get a written scope, weekly Loom updates, and a monthly retro. No status meetings."],
-              ["Where is the team based?",           "Legal entity in San Francisco. The team is distributed across a few time zones — faster response, not slower."],
+              ["Where is the team based?",           "Legal entity in Skopje, Macedonia."],
             ]} />
           </div>
         </div>
@@ -548,9 +561,9 @@ function HomePage({ setRoute }) {
 
       <CTASection
         setRoute={setRoute}
-        title={<>Ready when<br/>you are.</>}
-        description="One 30-minute call. We'll audit your site or ad account live and tell you two or three things to fix this week, paid or not."
-        buttonText="Book a call"
+        title={isMK ? <>{`Подготвени кога`}<br/>{`ќе бидете вие.`}</> : <>Ready when<br/>you are.</>}
+        description={isMK ? "Еден 30-минутен повик. Ќе ја ревидираме вашата страница или рекламна сметка во живо и ќе ви кажеме две или три работи за поправање оваа недела, платено или не." : "One 30-minute call. We'll audit your site or ad account live and tell you two or three things to fix this week, paid or not."}
+        buttonText={isMK ? "Закажи повик" : "Book a call"}
       />
     </div>
   );

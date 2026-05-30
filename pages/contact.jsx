@@ -208,7 +208,8 @@ function _BookingWidget_unused() {
   );
 }
 
-function ContactPage({ setRoute }) {
+function ContactPage({ setRoute, lang }) {
+  const isMK = lang === "mk";
   const [form, setForm] = React.useState({ name:"", email:"", budget:"", message:"" });
   const [sent, setSent] = React.useState(false);
 
@@ -228,18 +229,27 @@ function ContactPage({ setRoute }) {
         <div className="wrap">
           <div className="contact-hero-grid" style={{alignItems:"end", position:"relative", zIndex:1}}>
             <div>
-              <div className="eyebrow" style={{marginBottom:24, color:"#ffffff"}}>Contact</div>
+              <div className="eyebrow" style={{marginBottom:24, color:"#ffffff"}}>{isMK ? "Контакт" : "Contact"}</div>
               <h1 className="display upright" style={{margin:0, fontSize:"clamp(48px, 6.2vw, 92px)", fontWeight:700, letterSpacing:"-0.04em", lineHeight:1.02, color:"#ffffff"}}>
-                <span style={{display:"block"}}>Let's make something</span>
-                <span style={{display:"block"}}>that <span style={{color:"var(--accent)"}}>pays back</span>.</span>
+                {isMK ? (
+                  <>
+                    <span style={{display:"block"}}>Да направиме нешто</span>
+                    <span style={{display:"block"}}>кое <span style={{color:"var(--accent)"}}>се враќа</span>.</span>
+                  </>
+                ) : (
+                  <>
+                    <span style={{display:"block"}}>Let's make something</span>
+                    <span style={{display:"block"}}>that <span style={{color:"var(--accent)"}}>pays back</span>.</span>
+                  </>
+                )}
               </h1>
             </div>
             <div>
               <p style={{fontSize:19, lineHeight:1.5, maxWidth:"40ch", color:"rgba(255,255,255,0.85)", margin:"0 0 28px"}}>
-                Fill out the form, book a call, or just email. We answer the same day on weekdays. No drip campaigns, no calendar games.
+                {isMK ? "Пополнете го формуларот, закажете повик или само испратете имејл. Одговараме истиот ден во работни денови. Без drip кампањи, без игри со календарот." : "Fill out the form, book a call, or just email. We answer the same day on weekdays. No drip campaigns, no calendar games."}
               </p>
               <div style={{display:"flex", gap:24, flexWrap:"wrap"}}>
-                {[["📬", "contact@arcaiagency.net"], ["📍", "San Francisco, CA"], ["⏱", "Reply in &lt;4 hours"]].map(([icon, text], i) => (
+                {[["📬", "contact@arcaiagency.net"], ["📍", "Skopje, Macedonia"], ["⏱", isMK ? "Одговор за &lt;4 часа" : "Reply in &lt;4 hours"]].map(([icon, text], i) => (
                   <div key={i} style={{display:"flex", alignItems:"center", gap:8}}>
                     <span style={{fontSize:16}}>{icon}</span>
                     <span style={{fontSize:14, color:"rgba(255,255,255,0.75)"}} dangerouslySetInnerHTML={{__html: text}} />
@@ -258,12 +268,12 @@ function ContactPage({ setRoute }) {
           {/* LEFT — Form */}
           <div>
             <h2 className="display upright" style={{fontSize:44, margin:"0 0 36px", letterSpacing:"-0.03em", fontWeight:700}}>
-              Send a brief
+              {isMK ? "Испрати брифинг" : "Send a brief"}
             </h2>
 
             <form onSubmit={submit} style={{display:"flex", flexDirection:"column", gap:28}}>
               <div className="field">
-                <label htmlFor="name">Your name</label>
+                <label htmlFor="name">{isMK ? "Вашето ime" : "Your name"}</label>
                 <input className="input" id="name" type="text" required
                        placeholder="Jamie Hong"
                        value={form.name}
@@ -292,19 +302,19 @@ function ContactPage({ setRoute }) {
               </div>
 
               <div className="field">
-                <label htmlFor="message">Tell us about it</label>
+                <label htmlFor="message">{isMK ? "Кажете ни за тоа" : "Tell us about it"}</label>
                 <textarea className="textarea" id="message" rows="5" required
-                          placeholder="What are you building, what's working, what isn't…"
+                          placeholder={isMK ? "Што градите, што работи, што не…" : "What are you building, what's working, what isn't…"}
                           value={form.message}
                           onChange={(e) => setForm({...form, message: e.target.value})} />
               </div>
 
               <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", paddingTop:16, borderTop:"1px solid var(--hairline)", gap:20, flexWrap:"wrap"}}>
                 <span className="muted" style={{fontSize:14}}>
-                  {sent ? "✓ Sent — we'll be in touch today." : "We read every message."}
+                  {sent ? (isMK ? "✓ Испратено — ќе ве контактираме денес." : "✓ Sent — we'll be in touch today.") : (isMK ? "Ја читаме секоја порака." : "We read every message.")}
                 </span>
                 <button className="btn btn-accent btn-lg" type="submit">
-                  Send brief <span className="arrow">→</span>
+                  {isMK ? "Испрати брифинг" : "Send brief"} <span className="arrow">→</span>
                 </button>
               </div>
             </form>
@@ -312,15 +322,20 @@ function ContactPage({ setRoute }) {
             {/* Direct lines */}
             <div style={{marginTop:64, paddingTop:32, borderTop:"1px solid var(--hairline-strong)"}}>
               <h3 className="display upright" style={{fontSize:32, margin:"0 0 28px", letterSpacing:"-0.03em", fontWeight:700}}>
-                Or reach us directly
+                {isMK ? "Или контактирајте не директно" : "Or reach us directly"}
               </h3>
               <div className="contact-direct-grid">
-                {[
+                {(isMK ? [
+                  ["Имејл",       "contact@arcaiagency.net"],
+                  ["Студио",      "Скопје, Македонија"],
+                  ["Работно време","Пон–Пет, CET"],
+                  ["Социјални",   "LinkedIn, Instagram"],
+                ] : [
                   ["Email",  "contact@arcaiagency.net"],
-                  ["Studio", "San Francisco, California"],
-                  ["Hours",  "Mon–Fri, Pacific Time"],
+                  ["Studio", "Skopje, Macedonia"],
+                  ["Hours",  "Mon–Fri, CET"],
                   ["Socials","LinkedIn, Instagram"],
-                ].map(([label, val], i) => (
+                ]).map(([label, val], i) => (
                   <div key={i} style={{padding:"20px 24px", background:"var(--paper-2)", borderRadius:12, border:"1px solid var(--hairline)"}}>
                     <div className="eyebrow" style={{marginBottom:8}}>{label}</div>
                     <div style={{fontSize:15, fontWeight:500}}>{val}</div>

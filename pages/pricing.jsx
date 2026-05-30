@@ -2,7 +2,8 @@
 // PRICING
 // ============================================================
 
-function PricingPage({ setRoute }) {
+function PricingPage({ setRoute, lang }) {
+  const isMK = lang === "mk";
 
   const webTiers = [
     {
@@ -232,15 +233,22 @@ function PricingPage({ setRoute }) {
           <div className="pricing-faq-grid" style={{alignItems:"start"}}>
             <div>
               <div className="eyebrow" style={{marginBottom:16}}>FAQ</div>
-              <h2 className="display upright h-display-sm" style={{margin:0, maxWidth:"12ch"}}>Things people ask first.</h2>
+              <h2 className="display upright h-display-sm" style={{margin:0, maxWidth:"12ch"}}>{isMK ? "Прашања кои луѓето ги поставуваат прво." : "Things people ask first."}</h2>
             </div>
-            <FAQAccordion items={[
+            <FAQAccordion items={isMK ? [
+              ["Кој е типичниот временски период?",    "Повеќето веб сајтови траат четири до осум недели. Платените кампањи можат да бидат активни за неделу-две ако креативата е подготвена."],
+              ["Дали нудите тековна поддршка?",        "Секој пакет вклучува поддршка по лансирање. По тоа, ретенерот ги одржува работите во тек."],
+              ["Како функционира плаќањето?",          "Половина на стартување, половина на испорака за сајтови. Месечна наплата за платени ретенери."],
+              ["Дали работите со стартапи?",           "Да — повеќето клиенти се во фаза seed до Series B. Имаме Starter ниво изградено за рана фаза."],
+              ["Можете ли да превземете постоечки сајт?","Честопати, да. Прво ќе го ревидираме и искрено ќе ви кажеме дали е поевтино да го изградиме одново."],
+              ["Каде сте базирани?",                   "Правен субјект во Скопје, Македонија."],
+            ] : [
               ["What's the typical timeline?",       "Most websites take four to eight weeks. Paid campaigns can be live in a week or two if creative is ready."],
               ["Do you offer ongoing support?",      "Every package includes post-launch support. After that the retainer keeps things running."],
               ["How does payment work?",             "Half on kickoff, half on delivery for sites. Monthly billing for paid retainers."],
               ["Do you work with startups?",         "Yes — most of our roster is seed to Series B. We have a Starter tier built for early stage."],
               ["Can you take over an existing site?","Often, yes. We'll audit it first and tell you honestly if a rebuild is cheaper than a rescue."],
-              ["Where are you based?",               "San Francisco for the legal entity. The team is distributed across a few time zones."],
+              ["Where are you based?",               "Legal entity in Skopje, Macedonia."],
             ]} />
           </div>
         </div>

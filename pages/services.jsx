@@ -2,7 +2,8 @@
 // SERVICES
 // ============================================================
 
-function ServicesPage({ setRoute }) {
+function ServicesPage({ setRoute, lang }) {
+  const isMK = lang === "mk";
   return (
     <div className="page-enter">
 
@@ -11,18 +12,18 @@ function ServicesPage({ setRoute }) {
         <div className="wrap">
           <div className="svc-hero-grid" style={{alignItems:"end", position:"relative", zIndex:1}}>
             <div>
-              <div className="eyebrow" style={{marginBottom:24, color:"#ffffff"}}>What we do</div>
+              <div className="eyebrow" style={{marginBottom:24, color:"#ffffff"}}>{isMK ? "Што правиме" : "What we do"}</div>
               <h1 className="display upright" style={{margin:0, fontSize:"clamp(48px, 6.2vw, 88px)", fontWeight:700, letterSpacing:"-0.04em", lineHeight:1.02, color:"#ffffff"}}>
-                Two practices.<br/><span style={{color:"var(--accent)"}}>One</span> outcome.
+                {isMK ? <>Две практики.<br/><span style={{color:"var(--accent)"}}>Еден</span> резултат.</> : <>Two practices.<br/><span style={{color:"var(--accent)"}}>One</span> outcome.</>}
               </h1>
             </div>
             <div>
               <p style={{fontSize:18, lineHeight:1.6, color:"rgba(255,255,255,0.85)", margin:"0 0 36px"}}>
-                Editorial-grade websites and tightly measured paid acquisition — run as a single system, judged by one number: what comes back.
+                {isMK ? "Веб сајтови со уредничко ниво и прецизно мерена платена аквизиција — водени како единствен систем, судирани по еден број: тоа што се враќа." : "Editorial-grade websites and tightly measured paid acquisition — run as a single system, judged by one number: what comes back."}
               </p>
               <div style={{display:"flex", gap:12}}>
-                <a className="btn btn-accent btn-lg" onClick={() => setRoute("contact")}>Start a project <span className="arrow">→</span></a>
-                <a className="btn btn-lg" onClick={() => setRoute("pricing")} style={{background:"#ffffff", borderColor:"#ffffff", color:"var(--ink)"}}>See pricing</a>
+                <a className="btn btn-accent btn-lg" onClick={() => setRoute("contact")}>{isMK ? "Започни проект" : "Start a project"} <span className="arrow">→</span></a>
+                <a className="btn btn-lg" onClick={() => setRoute("pricing")} style={{background:"#ffffff", borderColor:"#ffffff", color:"var(--ink)"}}>{isMK ? "Види цени" : "See pricing"}</a>
               </div>
             </div>
           </div>
@@ -36,11 +37,11 @@ function ServicesPage({ setRoute }) {
           {/* Label + headline */}
           <div className="svc-web-head" style={{alignItems:"end", marginBottom:64, paddingBottom:48, borderBottom:"1px solid var(--hairline-strong)"}}>
             <div>
-              <div className="eyebrow" style={{marginBottom:18}}>Web design &amp; build</div>
-              <h2 className="display upright h-display-sm" style={{margin:0}}>Websites that <i style={{color:"var(--accent)"}}>earn</i> their keep.</h2>
+              <div className="eyebrow" style={{marginBottom:18}}>{isMK ? "Веб дизајн &amp; развој" : "Web design & build"}</div>
+              <h2 className="display upright h-display-sm" style={{margin:0}}>{isMK ? <>Веб сајтови кои <i style={{color:"var(--accent)"}}>си го заработуваат</i> местото.</> : <>Websites that <i style={{color:"var(--accent)"}}>earn</i> their keep.</>}</h2>
             </div>
             <p className="muted" style={{margin:0, fontSize:17, lineHeight:1.65}}>
-              Every page is built against a single conversion model. We start at the offer, work backwards through the buyer's question stack, and let layout follow logic — not the other way around.
+              {isMK ? "Секоја страница е изградена врз единствен модел на конверзија. Почнуваме од понудата, работиме наназад низ прашањата на купувачот и оставаме распоредот да следи логика — не обратното." : "Every page is built against a single conversion model. We start at the offer, work backwards through the buyer's question stack, and let layout follow logic — not the other way around."}
             </p>
           </div>
 
@@ -118,10 +119,17 @@ function ServicesPage({ setRoute }) {
             {/* Deliverables grid */}
             <div style={{display:"flex", flexDirection:"column", gap:0}}>
               {[
-                {icon:"▤", title:"Custom design", desc:"No templates. Type, grid, and motion built around your brand and your offer."},
-                {icon:"⚡", title:"Modern stack",  desc:"React, Next.js, or Framer — whichever ships fastest and scales farthest."},
-                {icon:"◎",  title:"Performance",   desc:"Sub-second first paint, smooth interactions, Core Web Vitals in the green."},
-                {icon:"⊞",  title:"Conversion",    desc:"Every page mapped to a goal. Tested, measured, and iterated after launch."},
+                ...(isMK ? [
+                  {icon:"▤", title:"Прилагоден дизајн", desc:"Секој распоред, интеракција и визуелен елемент е изграден околу вашиот бренд, вашето позиционирање и вашите цели. Без генерички шаблони. Без рециклирани дизајни."},
+                  {icon:"⚡", title:"Перформанси",       desc:"Брзо вчитување, мазни анимации и оптимизирани перформанси инженирани да ги задржат корисниците ангажирани и Core Web Vitals постојано силни."},
+                  {icon:"◎",  title:"Фокус на конверзија", desc:"Секоја секција е дизајнирана со цел. Јасен тек на корисниците, стратешко пораки и структура базирана на податоци изградена за да ги претвори посетителите во потенцијални клиенти."},
+                  {icon:"⊞",  title:"Современ стек",   desc:"React, Next.js или Framer — кој испорача најбрзо и скалира најдалеку за вашиот специфичен проект."},
+                ] : [
+                  {icon:"▤", title:"Custom Design", desc:"Every layout, interaction, and visual element is built around your brand, your positioning, and your goals. No generic templates. No recycled designs."},
+                  {icon:"⚡", title:"Performance",   desc:"Fast-loading pages, smooth animations, and optimized performance engineered to keep users engaged and Core Web Vitals consistently strong."},
+                  {icon:"◎",  title:"Conversion Focused", desc:"Every section is designed with purpose. Clear user flow, strategic messaging, and data-driven structure built to turn visitors into leads and customers."},
+                  {icon:"⊞",  title:"Modern Stack",  desc:"React, Next.js, or Framer — whichever ships fastest and scales farthest for your specific project."},
+                ]),
               ].map(({icon,title,desc},i) => (
                 <div key={i} style={{display:"grid",gridTemplateColumns:"44px 1fr",gap:16,padding:"20px 0",borderTop:"1px solid var(--hairline)",alignItems:"start"}}>
                   <div style={{width:36,height:36,borderRadius:8,background:"var(--accent-soft)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,color:"var(--accent)",flexShrink:0,marginTop:2}}>{icon}</div>
@@ -132,9 +140,9 @@ function ServicesPage({ setRoute }) {
                 </div>
               ))}
               <div style={{marginTop:24, padding:"20px 24px", background:"var(--paper-2)", border:"1px solid var(--hairline-strong)", borderRadius:12}}>
-                <div className="eyebrow" style={{marginBottom:14}}>What's in the box</div>
+                <div className="eyebrow" style={{marginBottom:14}}>{isMK ? "Што е вклучено" : "What's in the box"}</div>
                 <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:"6px 24px"}}>
-                  {["UI/UX in Figma","Responsive build","CMS integration","Performance pass","SEO foundation","Analytics setup","Post-launch support","Loom walkthrough"].map((it,i) => (
+                  {(isMK ? ["UI/UX во Figma","Responsive развој","CMS интеграција","Оптимизација на перформанси","SEO основи","Поставување аналитика","Поддршка по лансирање","Loom прегледување"] : ["UI/UX in Figma","Responsive build","CMS integration","Performance pass","SEO foundation","Analytics setup","Post-launch support","Loom walkthrough"]).map((it,i) => (
                     <div key={i} className="check"><span className="mark"></span><span style={{fontSize:13}}>{it}</span></div>
                   ))}
                 </div>
@@ -150,11 +158,11 @@ function ServicesPage({ setRoute }) {
 
           <div className="svc-ads-head" style={{alignItems:"end", marginBottom:64, paddingBottom:48, borderBottom:"1px solid var(--hairline-strong)"}}>
             <div>
-              <div className="eyebrow" style={{marginBottom:18}}>Paid acquisition</div>
-              <h2 className="display upright h-display-sm" style={{margin:0}}>Ads run like a <i style={{color:"var(--accent)"}}>portfolio</i>.</h2>
+              <div className="eyebrow" style={{marginBottom:18}}>{isMK ? "Платена аквизиција" : "Paid acquisition"}</div>
+              <h2 className="display upright h-display-sm" style={{margin:0}}>{isMK ? <>Огласи водени како <i style={{color:"var(--accent)"}}>портфолио</i>.</> : <>Ads run like a <i style={{color:"var(--accent)"}}>portfolio</i>.</>}</h2>
             </div>
             <p className="muted" style={{margin:0, fontSize:17, lineHeight:1.65}}>
-              We treat every campaign as a position — hypothesis, allocation, holding period, retro. Steadier returns, fewer panic kills.
+              {isMK ? "Кон секоја кампања пристапуваме како кон стратешка инвестиција, изградена врз истражување, тестирани претпоставки, паметна алокација и континуирана оптимизација. Резултатот е постабилен раст, поисправни одлуки и помалку реактивни грешки." : "We approach every campaign like a strategic investment, built on research, tested assumptions, smart allocation, and continuous optimization. The result is steadier growth, clearer decisions, and fewer reactive mistakes."}
             </p>
           </div>
 
@@ -163,10 +171,17 @@ function ServicesPage({ setRoute }) {
             {/* Ads deliverables first (flipped) */}
             <div style={{display:"flex", flexDirection:"column", gap:0}}>
               {[
-                {icon:"◎", title:"Precision targeting", desc:"Audience maps built from first-party data and look-alikes. No spray-and-pray."},
-                {icon:"⚡", title:"Creative testing",    desc:"Several concepts per cohort, killed on a tight schedule. Winners scale fast."},
-                {icon:"▤", title:"Attribution",          desc:"Honest measurement — server-side events plus view-through, no vanity numbers."},
-                {icon:"⊞", title:"Cadence",              desc:"Weekly reports in plain English. Monthly written retros with the numbers."},
+                ...(isMK ? [
+                  {icon:"◎", title:"Прецизно таргетирање",   desc:"Стратегии за публика изградени од реални податоци за клиенти, бихевиорални увиди и lookalike моделирање. Фокусирано таргетирање дизајнирано да ги достигне вистинските луѓе, а не да го троши буџетот."},
+                  {icon:"⚡", title:"Тестирање на креатива",  desc:"Повеќе концепти на креатива тестирани преку различни сегменти на публика со брзи циклуси на итерации. Кампањи кои работат добро се скалираат брзо, слабите се заменуваат веднаш."},
+                  {icon:"▤", title:"Атрибуција & Аналитика", desc:"Транспарентно следење на перформанси поддржано со точна атрибуција, server-side настани и значајни конверзиски податоци. Без metрики за суета, без напумпани бројки."},
+                  {icon:"⊞", title:"Извештаи & Оптимизација", desc:"Јасни неделни ажурирања на перформанси и детални месечни прегледи на стратегијата фокусирани на увиди, подобрувања и мерлив деловен раст."},
+                ] : [
+                  {icon:"◎", title:"Precision Targeting",   desc:"Audience strategies built from real customer data, behavioral insights, and lookalike modeling. Focused targeting designed to reach the right people, not waste budget."},
+                  {icon:"⚡", title:"Creative Testing",     desc:"Multiple creative concepts tested across different audience segments with rapid iteration cycles. High-performing campaigns scale fast, weak performers get replaced quickly."},
+                  {icon:"▤", title:"Attribution & Analytics", desc:"Transparent performance tracking powered by accurate attribution, server-side events, and meaningful conversion data. No vanity metrics, no inflated numbers."},
+                  {icon:"⊞", title:"Reporting & Optimization", desc:"Clear weekly performance updates and detailed monthly strategy reviews focused on insights, improvements, and measurable business growth."},
+                ]),
               ].map(({icon,title,desc},i) => (
                 <div key={i} style={{display:"grid",gridTemplateColumns:"44px 1fr",gap:16,padding:"20px 0",borderTop:"1px solid var(--hairline)",alignItems:"start"}}>
                   <div style={{width:36,height:36,borderRadius:8,background:"var(--accent-soft)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,color:"var(--accent)",flexShrink:0,marginTop:2}}>{icon}</div>
@@ -177,9 +192,9 @@ function ServicesPage({ setRoute }) {
                 </div>
               ))}
               <div style={{marginTop:24, padding:"20px 24px", background:"var(--paper)", border:"1px solid var(--hairline-strong)", borderRadius:12}}>
-                <div className="eyebrow" style={{marginBottom:14}}>What's in the box</div>
+                <div className="eyebrow" style={{marginBottom:14}}>{isMK ? "Што е вклучено" : "What's in the box"}</div>
                 <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:"6px 24px"}}>
-                  {["Meta Ads management","Google Ads management","Campaign strategy","Ad creative + copy","Testing program","Tracking setup","Monthly retros","Slack channel"].map((it,i) => (
+                  {(isMK ? ["Управување со Meta огласи","Управување со Google огласи","Стратегија на кампање","Рекламна креатива + текст","Програма за тестирање","Поставување следење","Месечни ретроспективи","Slack канал"] : ["Meta Ads management","Google Ads management","Campaign strategy","Ad creative + copy","Testing program","Tracking setup","Monthly retros","Slack channel"]).map((it,i) => (
                     <div key={i} className="check"><span className="mark"></span><span style={{fontSize:13}}>{it}</span></div>
                   ))}
                 </div>
@@ -338,10 +353,10 @@ function ServicesPage({ setRoute }) {
         <div className="wrap">
           <div className="svc-toolbelt-head" style={{alignItems:"start", marginBottom:64}}>
             <div>
-              <div className="eyebrow" style={{marginBottom:16}}>The toolbelt</div>
-              <h2 className="display upright h-display-sm" style={{margin:0}}>Boring stack. Loud results.</h2>
+              <div className="eyebrow" style={{marginBottom:16}}>{isMK ? "Алатниот опсег" : "The toolbelt"}</div>
+              <h2 className="display upright h-display-sm" style={{margin:0}}>{isMK ? "Досаден стек. Гласни резултати." : "Boring stack. Loud results."}</h2>
             </div>
-            <p className="muted" style={{margin:0, fontSize:17, lineHeight:1.65, paddingTop:40}}>We're allergic to fashion. Every tool is picked for one reason — it helps us ship faster and measure cleaner.</p>
+            <p className="muted" style={{margin:0, fontSize:17, lineHeight:1.65, paddingTop:40}}>{isMK ? "Сме алергични на мода. Секоја алатка е избрана поради една причина — ни помага да испораме побрзо и да мериме попрецизно." : "We're allergic to fashion. Every tool is picked for one reason — it helps us ship faster and measure cleaner."}</p>
           </div>
           <window.Reveal from="bottom">
           <div className="svc-toolbelt-grid" style={{background:"var(--hairline-strong)", border:"1px solid var(--hairline-strong)", borderRadius:16, overflow:"hidden"}}>
@@ -375,18 +390,22 @@ function ServicesPage({ setRoute }) {
         <div className="wrap">
           <div className="svc-process-head" style={{alignItems:"end", marginBottom:56}}>
             <div>
-              <div className="eyebrow" style={{marginBottom:16}}>How we work</div>
-              <h2 className="display upright h-display-sm" style={{margin:0}}>Three steps. No surprises.</h2>
+              <div className="eyebrow" style={{marginBottom:16}}>{isMK ? "Како работиме" : "How we work"}</div>
+              <h2 className="display upright h-display-sm" style={{margin:0}}>{isMK ? "Три чекори. Без изненадувања." : "Three steps. No surprises."}</h2>
             </div>
-            <p className="muted" style={{margin:0, fontSize:17, lineHeight:1.6}}>From first call to live — you see every file, every week, every decision in writing.</p>
+            <p className="muted" style={{margin:0, fontSize:17, lineHeight:1.6}}>{isMK ? "Од првиот повик до лансирање — гледате секоја датотека, секоја недела, секоја одлука во писмена форма." : "From first call to live — you see every file, every week, every decision in writing."}</p>
           </div>
 
           <window.StaggerReveal className="svc-process-cards" style={{}} baseDelay={0.1} stagger={0.13}>
-            {[
+            {(isMK ? [
+              {num:"01", title:"Откривање",  time:"Денови 1–5",   points:["60-мин стратешки повик","Ревизија на публиката и понудата","KPI дрво, единствена северна ѕвезда","Писмен опфат, фиксна цена"]},
+              {num:"02", title:"Изградба",   time:"Недели 2–7",   points:["Дизајн во Figma, прво одобрен","Инженеринг паралелно","Петочен Loom — без статус повици","QA, перформанси, лансирање"]},
+              {num:"03", title:"Компаундирање", time:"Тековно",  points:["Неделни творечки експерименти","Месечен писмен ретро","Slack за секојдневна комуникација","Еден замена на функција по квартал"]},
+            ] : [
               {num:"01", title:"Discovery", time:"Days 1–5",  points:["60-min strategy call","Audience & offer audit","KPI tree, single north star","Written scope, fixed price"]},
               {num:"02", title:"Build",     time:"Weeks 2–7", points:["Design in Figma, approved first","Engineering in parallel","Friday Loom — no status calls","QA, performance, launch"]},
               {num:"03", title:"Compound",  time:"Ongoing",   points:["Weekly creative experiments","Monthly written retro","Slack for day-to-day comms","One feature swap per quarter"]},
-            ].map(({num,title,time,points},i) => (
+            ]).map(({num,title,time,points},i) => (
               <div key={i} className="process-card" style={{border:"1px solid var(--hairline-strong)", borderRadius:16, padding:"32px 28px", background:"var(--paper)"}}>
                 <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:24}}>
                   <span style={{fontFamily:"var(--mono)", fontSize:11, letterSpacing:"0.14em", textTransform:"uppercase", color:"var(--accent)"}}>{num}</span>
@@ -409,9 +428,9 @@ function ServicesPage({ setRoute }) {
 
       <CTASection
         setRoute={setRoute}
-        title={<>Let's grow<br/>your numbers.</>}
-        description="Whether you need a site, ads, or both running as one engine — schedule a call. We'll tell you honestly if we can move the line."
-        buttonText="Schedule a call"
+        title={isMK ? <>{`Да ги зголемиме`}<br/>{`вашите броеви.`}</> : <>Let's grow<br/>your numbers.</>}
+        description={isMK ? "Без разлика дали ви треба сајт, огласи или двете да работат како еден систем — закажете повик. Ќе ви кажеме искрено дали можеме да го поместиме бројот." : "Whether you need a site, ads, or both running as one engine — schedule a call. We'll tell you honestly if we can move the line."}
+        buttonText={isMK ? "Закажи повик" : "Schedule a call"}
       />
     </div>
   );
